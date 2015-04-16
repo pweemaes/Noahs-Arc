@@ -1,17 +1,9 @@
 
 /**
- * Write a description of interface Algorithm_I here.
+ *  Algorithm_I 
  * 
- * @author (your name) 
- * @version (a version number or a date)
  */
 public interface Algorithm_I
 {
-    /**
-     * An example of a method header - replace this comment with your own
-     * 
-     * @param  y    a sample parameter for a method
-     * @return        the result produced by sampleMethod 
-     */
-    int sampleMethod(int y);
+    CSP
 }
