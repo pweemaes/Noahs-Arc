@@ -1,16 +1,4 @@
-
-/**
-<<<<<<< HEAD
- *  Variable
- */
-public class Variable
-{
-    private int min;
-    private int max;
-    
-    public Variable()
-    {     
-=======
+/*
  * Write a description of class Variable here.
  * 
  * @author (your name) 
@@ -29,7 +17,6 @@ public class Variable
     public String getName() 
     {
         return name;
->>>>>>> edit-this-one
     }
 
 }
