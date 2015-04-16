@@ -5,7 +5,7 @@
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class AC3 extends Algorithm_I
+public class AC3 implements  Algorithm_I
 {
     // instance variables - replace the example below with your own
     private int x;

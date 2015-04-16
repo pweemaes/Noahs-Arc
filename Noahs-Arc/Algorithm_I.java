@@ -1,33 +1,17 @@
 
 /**
- * Write a description of class Algorithm_I here.
+ * Write a description of interface Algorithm_I here.
  * 
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Algorithm_I
+public interface Algorithm_I
 {
-    // instance variables - replace the example below with your own
-    private int x;
-
     /**
-     * Constructor for objects of class Algorithm_I
-     */
-    public Algorithm_I()
-    {
-        // initialise instance variables
-        x = 0;
-    }
-
-    /**
-     * An example of a method - replace this comment with your own
+     * An example of a method header - replace this comment with your own
      * 
-     * @param  y   a sample parameter for a method
-     * @return     the sum of x and y 
+     * @param  y    a sample parameter for a method
+     * @return        the result produced by sampleMethod 
      */
-    public int sampleMethod(int y)
-    {
-        // put your code here
-        return x + y;
-    }
+    int sampleMethod(int y);
 }
