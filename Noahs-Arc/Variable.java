@@ -10,7 +10,7 @@ public class Variable
     private int[] domain;
     private String name;
     
-    public Variable()
+    public Variable(int[] domain)
     {
     }
     
