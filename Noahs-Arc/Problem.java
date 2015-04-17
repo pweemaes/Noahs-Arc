@@ -11,7 +11,7 @@ public class Problem
     {
     }
 
-    public Problem load(ProblemGenerator generator)
+    public static Problem load(ProblemGenerator generator)
     { return null;
     }
 }

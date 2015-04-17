@@ -9,7 +9,7 @@ public class Constraint
 {
     private Variable[] scope;
 
-    public Constraint()
+    public Constraint(Variable first, Variable second)
     {
     }
 

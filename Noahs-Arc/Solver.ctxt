@@ -2,5 +2,5 @@
 comment0.params=
 comment0.target=boolean\ runSolver()
 comment1.params=
-comment1.target=void\ getSolution()
+comment1.target=Variable\ getSolution()
 numComments=2

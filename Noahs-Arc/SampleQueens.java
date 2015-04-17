@@ -33,15 +33,13 @@ public class SampleQueens implements ProblemGenerator
         {
             for (int j = i + 1; j < size; j++)
             {
-                constraints.add(new AbstractAC3Constraint(variables.
+                constraints.add(new Constraint(variables.
                     get(i), variables.get(j))
                     {
                         @Override
                         public boolean check()
                         {
-                            return getValue(0) != getValue(1)
-                                && Math.abs(getValue(0) 
-                                - getValue(1)) != diff;
+                            return getValue(0) != getValue(1);
                         }
                     });
             }
@@ -58,13 +56,13 @@ public class SampleQueens implements ProblemGenerator
     }
     public static void main(String[] args)
     {
-        final ProblemGenerator generator = new Queens(Integer
+        final ProblemGenerator generator = new SampleQueens(Integer
                 .valueOf(args[0]));
-        final Solver solver = new MGACIter(Problem.load(generator));
+        final Solver solver = new AbstractSolver(Problem.load(generator));
         solver.runSolver();
         for (Variable v : generator.getVariables()) {
             System.out
-                    .println(v + ": " + solver.getSolution().get(v));
+                    .println(v + ": " + solver.getSolution());
         }
     }
 }
