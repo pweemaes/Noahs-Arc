@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.params=size
-comment0.target=SampleQueens(int)
+comment0.target=SampleProblem(int)
 comment1.params=
 comment1.target=void\ generate()
 comment2.params=

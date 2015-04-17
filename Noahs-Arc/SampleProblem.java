@@ -1,14 +1,14 @@
 import java.util.*;
 /**
- * SampleQueens
+ * SampleProblem
  */
-public class SampleQueens implements ProblemGenerator
+public class SampleProblem implements ProblemGenerator
 {
     private final int size;
     private final Collection<Constraint> constraints;
     private final List<Variable> variables;
     
-    public SampleQueens(int size) 
+    public SampleProblem(int size) 
     {
         this.size = size;
         constraints = new ArrayList<Constraint>();
@@ -56,7 +56,7 @@ public class SampleQueens implements ProblemGenerator
     }
     public static void main(String[] args)
     {
-        final ProblemGenerator generator = new SampleQueens(Integer
+        final ProblemGenerator generator = new SampleProblem(Integer
                 .valueOf(args[0]));
         final Solver solver = new AbstractSolver(Problem.load(generator));
         solver.runSolver();

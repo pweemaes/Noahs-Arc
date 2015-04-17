@@ -21,7 +21,4 @@ public class Constraint
     { return 0;
     }
     
-    public void revise(int variablePosition, int level)
-    {
-    }
 }

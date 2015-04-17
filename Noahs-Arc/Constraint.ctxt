@@ -5,6 +5,4 @@ comment1.params=
 comment1.target=boolean\ check()
 comment2.params=variablePosition
 comment2.target=int\ getValue(int)
-comment3.params=variablePosition\ level
-comment3.target=void\ revise(int,\ int)
-numComments=4
+numComments=3
