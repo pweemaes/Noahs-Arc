@@ -2,7 +2,7 @@
 comment0.params=
 comment0.target=void\ generate()
 comment1.params=
-comment1.target=void\ getVariables()
+comment1.target=java.util.List\ getVariables()
 comment2.params=
-comment2.target=void\ getConstraints()
+comment2.target=java.util.Collection\ getConstraints()
 numComments=3

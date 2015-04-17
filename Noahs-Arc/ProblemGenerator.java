@@ -1,4 +1,4 @@
-
+import java.util.*;
 /**
  * Write a description of interface ProblemGenerator here.
  * 
@@ -7,7 +7,7 @@
  */
 public interface ProblemGenerator
 {
-    public void generate();
-    public void getVariables();
-    public void getConstraints();
+    void generate();
+    List<Variable> getVariables();
+    Collection<Constraint> getConstraints();
 }
