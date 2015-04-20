@@ -33,8 +33,7 @@ public class SampleProblem implements ProblemGenerator
         {
             for (int j = i + 1; j < size; j++)
             {
-                constraints.add(new Constraint(variables.
-                    get(i), variables.get(j))
+                constraints.add(new Constraint()
                     {
                         @Override
                         public boolean check()

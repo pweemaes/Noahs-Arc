@@ -1,9 +1,9 @@
 
 /**
- * Constraint class
+ * AllDifferent
  * 
  */
-public class Constraint
+public class AllDiff extends Constraint
 {
     private Variable[] appliesTo;
 
