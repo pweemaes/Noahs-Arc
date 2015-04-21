@@ -6,13 +6,19 @@
 public class Constraint
 {
     private Variable[] appliesTo;
+    
+    public Constraint(Variable[] variables)
+    {
+        appliesTo = variables;
+    }
 
     public boolean check() 
     { return false;
     }
     
-    public int getValue(int variablePosition)
-    { return 0;
+    
+    public Variable getVariable(int variablePosition)
+    { return appliesTo[variablePosition];
     }
     
 }

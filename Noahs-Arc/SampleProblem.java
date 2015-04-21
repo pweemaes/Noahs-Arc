@@ -1,9 +1,11 @@
+/*
 import java.util.*;
 /**
  * SampleProblem
- */
+
 public class SampleProblem implements ProblemGenerator
 {
+   
     private final int size;
     private final Collection<Constraint> constraints;
     private final List<Variable> variables;
@@ -64,5 +66,6 @@ public class SampleProblem implements ProblemGenerator
                     .println(v + ": " + solver.getSolution());
         }
     }
+    
 }
-
+*/
