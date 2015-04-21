@@ -12,6 +12,7 @@ public class Sudoku implements ProblemGenerator
     {
         constraints = new ArrayList<Constraint>();
         variables = new ArrayList<Variable>();
+        generate();
     }
         
     @Override
@@ -27,7 +28,7 @@ public class Sudoku implements ProblemGenerator
         // makes 0-80 variables with domain 1-9
         for (int i = 0; i < (SIZE * SIZE); i++)
         {
-            variables.add(new Variable(domain));
+            variables.add(new Variable(domain, i));
         }
         
         Variable[][] rows = new Variable[SIZE][SIZE];
@@ -48,7 +49,22 @@ public class Sudoku implements ProblemGenerator
             }
         }
         
-        //TODO subgrids....
+        Variable[][] boxes = new Variable[SIZE][SIZE];
+        for (int boxrow = 0; boxrow < 3; boxrow++)
+        {
+            for (int boxcol = 0; boxcol < 3; boxcol++)
+            {   
+                for (int k = 0; k < 3; k++)
+                {
+                    for (int l = 0; l < 3; l++)
+                    {
+                        int v = (k * 9 + l) + (boxrow * 27 + boxcol * 3);
+                        int w = k + l * 3;
+                        boxes[boxrow + boxcol * 3][w] = variables.get(v);
+                    }
+                }
+            }
+        }
         
         for (int i = 0; i < SIZE; i++)
         {
@@ -71,6 +87,24 @@ public class Sudoku implements ProblemGenerator
                 }
             });
             constraints.add(new Constraint(cols[i])
+            {
+                @Override
+                public boolean check()
+                {
+                    // Set.add returns false if the value already exists in the set.
+                    // we can use this to check if all values in the constraint are different
+                    Set<Integer> seen = new HashSet<Integer>();
+                    for (int i = 0; i < SIZE; i++)
+                    {
+                        if (seen.add(getVariable(i).getValue()))
+                            continue;
+                        else
+                            return false;
+                    }
+                    return true;
+                }
+            });
+            constraints.add(new Constraint(boxes[i])
             {
                 @Override
                 public boolean check()

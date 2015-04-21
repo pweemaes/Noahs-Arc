@@ -11,8 +11,10 @@ public class Variable
     private String name;
     private int value;
     
-    public Variable(int[] domain)
+    public Variable(int[] domainParam, int id)
     {
+        domain = domainParam;
+        name = Integer.toString(id);
     }
     
     public String getName() 
