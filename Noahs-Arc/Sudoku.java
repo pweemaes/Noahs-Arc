@@ -135,10 +135,10 @@ public class Sudoku implements ProblemGenerator
     }
     public static void main(String[] args)
     {
-        final ProblemGenerator generator = new Sudoku();
-        final Solver solver = new AbstractSolver(Problem.load(generator));
+        final ProblemGenerator sudokuProblem = new Sudoku();
+        final Solver solver = new AbstractSolver(Problem.load(sudokuProblem));
         solver.runSolver();
-        for (Variable v : generator.getVariables()) {
+        for (Variable v : sudokuProblem.getVariables()) {
             System.out
                     .println(v + ": " + solver.getSolution());
         }
