@@ -17,4 +17,6 @@ comment7.params=
 comment7.target=java.util.List\ getVariables()
 comment8.params=args
 comment8.target=void\ main(java.lang.String[])
-numComments=9
+comment9.params=
+comment9.target=void\ printAll()
+numComments=10

@@ -86,8 +86,36 @@ public class Queens implements Problem
     
     public static void main(String[] args)
     {
-        final Problem queensProblem = new Queens(8);
-        final Solver solver = new BacktrackSolver(queensProblem);
+        final Problem queensProblem = new Queens();
+        final Solver solver = new BacktrackSolver(queensProblem)
+        {
+            @Override
+            public void printAll()
+            {
+                int n = getVarLength();
+                char[][] board= new char[n][n];
+                for (int row = 0; row < n; row++)
+                {
+                    for (int col = 0; col < n; col++)
+                    {
+                        board[row][col] = '+';
+                        int value = getVariable(row).getValue();
+                        if (value != -1)
+                            board[row][value] = '@';
+                    }
+                }
+                
+                for (int i = 0; i < n; i++)
+                {
+                    for (int j = 0; j < n; j++)
+                    {
+                        System.out.print(board[i][j]);
+                        System.out.print(' ');
+                    }
+                    System.out.print("\n\n");
+                }
+            }
+        };
         solver.printAll();
         System.out.print("\n======================\n");
         if (solver.runSolver())
