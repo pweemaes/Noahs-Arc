@@ -3,5 +3,5 @@ public interface Problem
 {
     void generate();
     List<Variable> getVariables();
-    Collection<Constraint> getConstraints();
+    List<Constraint> getConstraints();
 }

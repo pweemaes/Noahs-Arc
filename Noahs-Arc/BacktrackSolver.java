@@ -4,7 +4,7 @@ import java.util.*;
  */
 public class BacktrackSolver implements Solver
 {
-    private final Collection<Constraint> constraints;
+    private final List<Constraint> constraints;
     private final List<Variable> variables;
     public BacktrackSolver(Problem problem)
     {
@@ -15,18 +15,83 @@ public class BacktrackSolver implements Solver
     // returns true if a valid solution was found. if not returns false
     public boolean runSolver()
     {
-        // set all vars to first available in domain
+        Variable current = getUnassignedVar();
+        if (current == null)
+            return true;
+        for (int i = 0; i < current.getDomain().length; i++)
+        {
+            int newval = current.getDomain()[i];
+            current.setValue(newval);
+            if (constraintsSatisfied(constraintsWithAnyVals()))
+            {
+                if (runSolver())
+                    return true;  
+            }
+            current.setValue(current.getPrevious());
+        }
+        return false;
+    }
+    
+    public Variable getVariable(int varPos)
+    {
+        return variables.get(varPos);
+    }
+    
+    // returns first unassigned variable, null means all are assigned
+    private Variable getUnassignedVar()
+    {
         for (int i = 0; i < variables.size(); i++)
         {
-            Variable currentVar = variables.get(i);
-            int[] domain = currentVar.getDomain();
-            currentVar.setValue(domain[0]);
+            if (variables.get(i).hasValue())
+                continue;
+            else 
+                return variables.get(i);
+        }
+        return null;
+    }
+    
+    private boolean constraintHasAnyVals(Constraint c)
+    {
+        Variable[] vars = c.getVariables();
+        for (int i = 0; i < vars.length; i++)
+        {
+            if (vars[i].hasValue())
+                return true;
+            else
+                continue;
+        }
+        return false;
+    }
+    
+    private List<Constraint> constraintsWithAnyVals()
+    {
+        List<Constraint> applicable = new ArrayList<Constraint>();
+        for (int i = 0; i < constraints.size(); i++)
+        {
+            if (constraintHasAnyVals(constraints.get(i)))
+                applicable.add(constraints.get(i));
+        }
+        return applicable;
+    }
+    
+    private boolean constraintsSatisfied(List<Constraint> cList)
+    {
+        for (int i = 0; i < cList.size(); i++)
+        {
+            if (cList.get(i).check())
+                continue;
+            else 
+                return false;
         }
         return true;
     }
     
-    public Variable getSolution(int varPos)
+    public int getVarLength()
     {
-        return variables.get(varPos);
+        return variables.size();
+    }
+   
+    public void printAll()
+    {
     }
 }

@@ -5,38 +5,68 @@ import java.util.*;
 public class Sudoku implements Problem
 {
     private final static int SIZE = 9;
-    private final Collection<Constraint> constraints;
+    private final static int SQRTSIZE = 3;
+    private final List<Constraint> constraints;
     private final List<Variable> variables;
+    static double start = 0.0;
+    static double stop = 0.0;
     
     public Sudoku()
     {
         constraints = new ArrayList<Constraint>();
         variables = new ArrayList<Variable>();
-        generate();
-    }
         
-    @Override
-    public void generate() 
-    {
-        // domain goes from 1 to SIZE (9)
+        // domain goes from 1 to SIZE
         final int[] domain = new int[SIZE];
         for (int i = 1; i <= SIZE; i++)
         {
             domain[i - 1] = i;
         }
         
-        // makes 0-80 variables with domain 1-9
+        // makes 0-80 variables with domain 1-SIZE
         for (int i = 0; i < (SIZE * SIZE); i++)
         {
             variables.add(new Variable(domain, i));
         }
+        generate();
+    }
+    
+    public Sudoku(int[] board)
+    {
+        constraints = new ArrayList<Constraint>();
+        variables = new ArrayList<Variable>();
+        
+        // domain goes from 1 to SIZE
+        final int[] domain = new int[SIZE];
+        for (int i = 1; i <= SIZE; i++)
+        {
+            domain[i - 1] = i;
+        }
+        
+        // makes 0-80 variables with domain 1-SIZE
+        for (int i = 0; i < (SIZE * SIZE); i++)
+        {
+            variables.add(new Variable(domain, i));
+        }
+        
+        for (int i = 0; i < board.length; i++)
+        {
+            if (board[i] != 0)
+                variables.get(i).setValue(board[i]);
+        }
+        generate();
+    }
+        
+    @Override
+    public void generate() 
+    {
         
         Variable[][] rows = new Variable[SIZE][SIZE];
         for (int i = 0; i < SIZE; i++)
         {
             for (int j = 0; j < SIZE; j++)
             {
-                rows[i][j] = variables.get(i * 9 + j);
+                rows[i][j] = variables.get(i * SIZE + j);
             }
         }
         
@@ -45,22 +75,22 @@ public class Sudoku implements Problem
         {
             for (int j = 0; j < SIZE; j++)
             {
-                cols[i][j] = variables.get(i + j * 9);
+                cols[i][j] = variables.get(i + j * SIZE);
             }
         }
         
         Variable[][] boxes = new Variable[SIZE][SIZE];
-        for (int boxrow = 0; boxrow < 3; boxrow++)
+        for (int boxrow = 0; boxrow < SQRTSIZE; boxrow++)
         {
-            for (int boxcol = 0; boxcol < 3; boxcol++)
+            for (int boxcol = 0; boxcol < SQRTSIZE; boxcol++)
             {   
-                for (int k = 0; k < 3; k++)
+                for (int k = 0; k < SQRTSIZE; k++)
                 {
-                    for (int l = 0; l < 3; l++)
+                    for (int l = 0; l < SQRTSIZE; l++)
                     {
-                        int v = (k * 9 + l) + (boxrow * 27 + boxcol * 3);
-                        int w = k + l * 3;
-                        boxes[boxrow + boxcol * 3][w] = variables.get(v);
+                        int v = (k * SIZE + l) + (boxrow * SIZE * SQRTSIZE + boxcol * SQRTSIZE);
+                        int w = k + l * SQRTSIZE;
+                        boxes[boxrow + boxcol * SQRTSIZE][w] = variables.get(v);
                     }
                 }
             }
@@ -68,83 +98,145 @@ public class Sudoku implements Problem
         
         for (int i = 0; i < SIZE; i++)
         {
+           
             constraints.add(new Constraint(rows[i])
             {
                 @Override
                 public boolean check()
                 {
-                    // Set.add returns false if the value already exists in the set.
                     // we can use this to check if all values in the constraint are different
                     Set<Integer> seen = new HashSet<Integer>();
+                    int needed = SIZE;
                     for (int i = 0; i < SIZE; i++)
                     {
-                        if (seen.add(getVariable(i).getValue()))
-                            continue;
+                        // if we have no value, we must pretend we see a new value anyways
+                        if (getVariable(i).hasValue())
+                            seen.add(getVariable(i).getValue());  
                         else
-                            return false;
+                            needed--;
                     }
-                    return true;
+                    return seen.size() >= needed;
                 }
             });
+            
+            
             constraints.add(new Constraint(cols[i])
             {
                 @Override
                 public boolean check()
                 {
-                    // Set.add returns false if the value already exists in the set.
                     // we can use this to check if all values in the constraint are different
                     Set<Integer> seen = new HashSet<Integer>();
+                    int needed = SIZE;
                     for (int i = 0; i < SIZE; i++)
                     {
-                        if (seen.add(getVariable(i).getValue()))
-                            continue;
+                        // if we have no value, we must pretend we see a new value anyways
+                        if (getVariable(i).hasValue())
+                            seen.add(getVariable(i).getValue());  
                         else
-                            return false;
+                            needed--;
                     }
-                    return true;
+                    return seen.size() >= needed;
                 }
             });
+            
             constraints.add(new Constraint(boxes[i])
             {
                 @Override
                 public boolean check()
                 {
-                    // Set.add returns false if the value already exists in the set.
                     // we can use this to check if all values in the constraint are different
                     Set<Integer> seen = new HashSet<Integer>();
+                    int needed = SIZE;
                     for (int i = 0; i < SIZE; i++)
                     {
-                        if (seen.add(getVariable(i).getValue()))
-                            continue;
+                        // if we have no value, we must pretend we see a new value anyways
+                        if (getVariable(i).hasValue())
+                            seen.add(getVariable(i).getValue());  
                         else
-                            return false;
+                            needed--;
                     }
-                    return true;
+                    return seen.size() >= needed;
                 }
             });
+            
         }
     }
     
     @Override
-    public Collection<Constraint> getConstraints() {
+    public List<Constraint> getConstraints() {
         return constraints;
     }
     @Override
     public List<Variable> getVariables() {
         return variables;
     }
-    public static void main(String[] args)
+    
+    public static void startClock()
     {
-        final Problem sudokuProblem = new Sudoku();
-        final Solver solver = new BacktrackSolver(sudokuProblem);
-        solver.runSolver();
-        
-        /** need better way to display
-        for (Variable v : sudokuProblem.getVariables()) {
-            System.out
-                    .println(v + ": " + solver.getSolution());
+        start = System.nanoTime(); 
+    }
+    
+    public static void stopClock()
+    {
+        stop = System.nanoTime();
+    }
+    
+    public static void solveAndPrint(Problem sudokuProblem)
+    {
+        final Solver solver = new BacktrackSolver(sudokuProblem)
+        {
+            @Override
+            public void printAll()
+            {
+                int linebreaker = 0;
+                for (int i = 0; i < getVarLength(); i++)
+                {
+                    String val = Integer.toString(getVariable(i).getValue());
+                    if (val.equals("-1"))
+                        val = "_";
+                    System.out.print(val + " ");
+                    linebreaker++;
+                    if (linebreaker >= SIZE)
+                    {
+                        System.out.print("\n\n");
+                        linebreaker = 0;
+                    }
+                }
+            }
+        };
+        solver.printAll();
+        startClock();
+        if (solver.runSolver())
+        {
+            stopClock();
+            double runTime = (stop - start) / 1000000000;
+            System.out.print("========SOLVED========\n");
+            
+            System.out.print("====Time (seconds): " + Double.toString(runTime) + " =====\n");
         }
+        else 
+            System.out.print("=====NO SOLUTION======\n");
+        solver.printAll();
+    }
+    
+    public static void main(String[] args)
+    {              
+        final Problem sudokuProblem = new Sudoku();
+        solveAndPrint(sudokuProblem);
+        
+        System.out.print("\n========NEW BOARD========\n\n");
+        
+        /**
+        int[] board2 = new int[81];
+        board2[0] = 4;
+        board2[1] = 5;
+        board2[2] = 8;
+        
+        final Problem sudokuProblem2 = new Sudoku(board2);
+        solveAndPrint(sudokuProblem2);
         */
+        
     }
 }
 

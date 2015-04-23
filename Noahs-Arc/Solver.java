@@ -7,5 +7,7 @@ public interface Solver
 {
     public boolean runSolver();
     
-    public Variable getSolution(int varPos);
+    public Variable getVariable(int varPos);
+    
+    public void printAll();
 }
