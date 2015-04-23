@@ -12,12 +12,7 @@ public class Sudoku implements Problem
     {
         constraints = new ArrayList<Constraint>();
         variables = new ArrayList<Variable>();
-        generate();
-    }
         
-    @Override
-    public void generate() 
-    {
         // domain goes from 1 to SIZE (9)
         final int[] domain = new int[SIZE];
         for (int i = 1; i <= SIZE; i++)
@@ -30,6 +25,12 @@ public class Sudoku implements Problem
         {
             variables.add(new Variable(domain, i));
         }
+        generate();
+    }
+        
+    @Override
+    public void generate() 
+    {
         
         Variable[][] rows = new Variable[SIZE][SIZE];
         for (int i = 0; i < SIZE; i++)
@@ -68,6 +69,7 @@ public class Sudoku implements Problem
         
         for (int i = 0; i < SIZE; i++)
         {
+           
             constraints.add(new Constraint(rows[i])
             {
                 @Override
@@ -87,48 +89,47 @@ public class Sudoku implements Problem
                     return seen.size() >= needed;
                 }
             });
-            /**
+            
             constraints.add(new Constraint(cols[i])
             {
                 @Override
                 public boolean check()
                 {
-                    // Set.add returns false if the value already exists in the set.
                     // we can use this to check if all values in the constraint are different
                     Set<Integer> seen = new HashSet<Integer>();
-                    int needed = 9;
+                    int needed = SIZE;
                     for (int i = 0; i < SIZE; i++)
                     {
                         // if we have no value, we must pretend we see a new value anyways
-                        if (! getVariable(i).hasValue())
-                            needed--;
+                        if (getVariable(i).hasValue())
+                            seen.add(getVariable(i).getValue());  
                         else
-                            seen.add(getVariable(i).getValue());
+                            needed--;
                     }
-                    return seen.size() == needed;
+                    return seen.size() >= needed;
                 }
             });
+            
             constraints.add(new Constraint(boxes[i])
             {
                 @Override
                 public boolean check()
                 {
-                    // Set.add returns false if the value already exists in the set.
                     // we can use this to check if all values in the constraint are different
                     Set<Integer> seen = new HashSet<Integer>();
-                    int needed = 9;
+                    int needed = SIZE;
                     for (int i = 0; i < SIZE; i++)
                     {
                         // if we have no value, we must pretend we see a new value anyways
-                        if (! getVariable(i).hasValue())
-                            needed--;
+                        if (getVariable(i).hasValue())
+                            seen.add(getVariable(i).getValue());  
                         else
-                            seen.add(getVariable(i).getValue());
+                            needed--;
                     }
-                    return seen.size() == needed;
+                    return seen.size() >= needed;
                 }
             });
-            */
+            
         }
     }
     

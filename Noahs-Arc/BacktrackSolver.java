@@ -25,9 +25,9 @@ public class BacktrackSolver implements Solver
             if (constraintsSatisfied(constraintsWithAnyVals()))
             {
                 if (runSolver())
-                    return true;
-                current.setValue(current.getPrevious());
+                    return true;  
             }
+            current.setValue(current.getPrevious());
         }
         return false;
     }
@@ -56,9 +56,9 @@ public class BacktrackSolver implements Solver
         for (int i = 0; i < vars.length; i++)
         {
             if (vars[i].hasValue())
-                continue;
-            else
                 return true;
+            else
+                continue;
         }
         return false;
     }
