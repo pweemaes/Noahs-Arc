@@ -1,6 +1,8 @@
 #BlueJ class context
 comment0.params=
-comment0.target=Problem()
-comment1.params=generator
-comment1.target=Problem\ load(ProblemGenerator)
-numComments=2
+comment0.target=void\ generate()
+comment1.params=
+comment1.target=java.util.List\ getVariables()
+comment2.params=
+comment2.target=java.util.Collection\ getConstraints()
+numComments=3

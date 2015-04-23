@@ -12,7 +12,7 @@ public class AbstractSolver implements Solver
     { return false;
     }
     
-    public Variable getSolution ()
+    public Variable getSolution (int varPos)
     { return null;
     }
 }

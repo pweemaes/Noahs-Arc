@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.params=problem
-comment0.target=AbstractSolver(Problem)
+comment0.target=BacktrackSolver(Problem)
 comment1.params=
 comment1.target=boolean\ runSolver()
 comment2.params=varPos

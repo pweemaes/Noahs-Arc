@@ -9,14 +9,32 @@ public class Variable
     // instance variables - replace the example below with your own
     private int[] domain;
     private String name;
+    private int value;
     
-    public Variable(int[] domain)
+    public Variable(int[] domainParam, int id)
     {
+        domain = domainParam;
+        name = Integer.toString(id);
+    }
+    
+    public void setValue(int valToSet)
+    {
+        value = valToSet;
+    }
+    
+    public int[] getDomain()
+    {
+        return domain;
     }
     
     public String getName() 
     {
         return name;
+    }
+    
+    public int getValue()
+    {
+        return value;
     }
 
 }

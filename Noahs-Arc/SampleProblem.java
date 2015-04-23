@@ -1,9 +1,11 @@
+/*
 import java.util.*;
 /**
  * SampleProblem
- */
+
 public class SampleProblem implements ProblemGenerator
 {
+   
     private final int size;
     private final Collection<Constraint> constraints;
     private final List<Variable> variables;
@@ -33,8 +35,7 @@ public class SampleProblem implements ProblemGenerator
         {
             for (int j = i + 1; j < size; j++)
             {
-                constraints.add(new Constraint(variables.
-                    get(i), variables.get(j))
+                constraints.add(new Constraint()
                     {
                         @Override
                         public boolean check()
@@ -65,5 +66,6 @@ public class SampleProblem implements ProblemGenerator
                     .println(v + ": " + solver.getSolution());
         }
     }
+    
 }
-
+*/

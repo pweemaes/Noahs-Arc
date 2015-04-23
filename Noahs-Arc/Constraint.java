@@ -1,24 +1,24 @@
 
 /**
- * Write a description of class Constraint here.
+ * Constraint class
  * 
- * @author (your name) 
- * @version (a version number or a date)
  */
 public class Constraint
 {
-    private Variable[] scope;
-
-    public Constraint(Variable first, Variable second)
+    private Variable[] appliesTo;
+    
+    public Constraint(Variable[] variables)
     {
+        appliesTo = variables;
     }
 
     public boolean check() 
     { return false;
     }
     
-    public int getValue(int variablePosition)
-    { return 0;
+    
+    public Variable getVariable(int variablePosition)
+    { return appliesTo[variablePosition];
     }
     
 }

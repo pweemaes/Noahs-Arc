@@ -1,8 +1,8 @@
 #BlueJ class context
-comment0.params=first\ second
-comment0.target=Constraint(Variable,\ Variable)
+comment0.params=variables
+comment0.target=Constraint(Variable[])
 comment1.params=
 comment1.target=boolean\ check()
 comment2.params=variablePosition
-comment2.target=int\ getValue(int)
+comment2.target=Variable\ getVariable(int)
 numComments=3
