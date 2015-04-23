@@ -17,6 +17,16 @@ public class Variable
         name = Integer.toString(id);
     }
     
+    public void setValue(int valToSet)
+    {
+        value = valToSet;
+    }
+    
+    public int[] getDomain()
+    {
+        return domain;
+    }
+    
     public String getName() 
     {
         return name;

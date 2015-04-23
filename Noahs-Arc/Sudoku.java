@@ -2,7 +2,7 @@ import java.util.*;
 /**
  * Sudoku
  */
-public class Sudoku implements ProblemGenerator
+public class Sudoku implements Problem
 {
     private final static int SIZE = 9;
     private final Collection<Constraint> constraints;
@@ -135,13 +135,16 @@ public class Sudoku implements ProblemGenerator
     }
     public static void main(String[] args)
     {
-        final ProblemGenerator sudokuProblem = new Sudoku();
-        final Solver solver = new AbstractSolver(Problem.load(sudokuProblem));
+        final Problem sudokuProblem = new Sudoku();
+        final Solver solver = new BacktrackSolver(sudokuProblem);
         solver.runSolver();
+        
+        /** need better way to display
         for (Variable v : sudokuProblem.getVariables()) {
             System.out
                     .println(v + ": " + solver.getSolution());
         }
+        */
     }
 }
 

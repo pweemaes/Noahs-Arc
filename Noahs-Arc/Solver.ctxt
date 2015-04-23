@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.params=
 comment0.target=boolean\ runSolver()
-comment1.params=
-comment1.target=Variable\ getSolution()
+comment1.params=varPos
+comment1.target=Variable\ getSolution(int)
 numComments=2

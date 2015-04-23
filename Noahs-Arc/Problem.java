@@ -1,17 +1,7 @@
-
-/**
- * Write a description of class CSP here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
-public class Problem
+import java.util.*;
+public interface Problem
 {
-    public Problem()
-    {
-    }
-
-    public static Problem load(ProblemGenerator generator)
-    { return null;
-    }
+    void generate();
+    List<Variable> getVariables();
+    Collection<Constraint> getConstraints();
 }
