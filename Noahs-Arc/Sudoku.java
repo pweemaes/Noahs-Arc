@@ -23,7 +23,7 @@ public class Sudoku implements Problem
         // makes 0-80 variables with domain 1-9
         for (int i = 0; i < (SIZE * SIZE); i++)
         {
-            variables.add(new Variable(domain, i, 0));
+            variables.add(new Variable(domain, i));
         }
         generate();
     }
@@ -43,7 +43,7 @@ public class Sudoku implements Problem
         // makes 0-80 variables with domain 1-9
         for (int i = 0; i < (SIZE * SIZE); i++)
         {
-            variables.add(new Variable(domain, i, 0));
+            variables.add(new Variable(domain, i));
         }
         
         for (int i = 0; i < board.length; i++)

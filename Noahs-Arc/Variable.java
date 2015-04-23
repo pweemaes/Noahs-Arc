@@ -12,12 +12,12 @@ public class Variable
     private int value;
     private int previousVal;
     
-    public Variable(int[] domainParam, int id, int val)
+    public Variable(int[] domainParam, int id)
     {
         domain = domainParam;
         name = Integer.toString(id);
         previousVal = 0;
-        value = val;
+        value = -1;
     }
     
     public void setValue(int valToSet)
@@ -28,7 +28,7 @@ public class Variable
     
     public boolean hasValue()
     {
-        return value != 0;  
+        return value != -1;  
     }
     
     public int[] getDomain()
