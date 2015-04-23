@@ -32,7 +32,7 @@ public class BacktrackSolver implements Solver
         return false;
     }
     
-    public Variable getSolution(int varPos)
+    public Variable getVariable(int varPos)
     {
         return variables.get(varPos);
     }
@@ -86,19 +86,12 @@ public class BacktrackSolver implements Solver
         return true;
     }
     
+    public int getVarLength()
+    {
+        return variables.size();
+    }
+   
     public void printAll()
     {
-        int linebreaker = 0;
-        for (int i = 0; i < variables.size(); i++)
-        {
-            String val = Integer.toString(variables.get(i).getValue());
-            System.out.print(val + " ");
-            linebreaker++;
-            if (linebreaker >= 9)
-            {
-                System.out.print("\n\n");
-                linebreaker = 0;
-            }
-        }
     }
 }

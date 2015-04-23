@@ -2,7 +2,7 @@
 comment0.params=
 comment0.target=boolean\ runSolver()
 comment1.params=varPos
-comment1.target=Variable\ getSolution(int)
+comment1.target=Variable\ getVariable(int)
 comment2.params=
 comment2.target=void\ printAll()
 numComments=3

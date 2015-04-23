@@ -1,6 +1,6 @@
 #BlueJ class context
-comment0.params=domainParam\ id\ val
-comment0.target=Variable(int[],\ int,\ int)
+comment0.params=domainParam\ id
+comment0.target=Variable(int[],\ int)
 comment1.params=valToSet
 comment1.target=void\ setValue(int)
 comment2.params=
