@@ -7,6 +7,8 @@ public class Queens implements Problem
     private int SIZE;
     private final List<Constraint> constraints;
     private final List<Variable> variables;
+    static double start = 0.0;
+    static double stop = 0.0;
     
     public Queens()
     {
@@ -83,10 +85,18 @@ public class Queens implements Problem
         return variables;
     }
     
-    
-    public static void main(String[] args)
+    public static void startClock()
     {
-        final Problem queensProblem = new Queens();
+        start = System.nanoTime(); 
+    }
+    
+    public static void stopClock()
+    {
+        stop = System.nanoTime();
+    }
+    
+    public static void solveAndPrint(Problem queensProblem)
+    {
         final Solver solver = new BacktrackSolver(queensProblem)
         {
             @Override
@@ -117,12 +127,37 @@ public class Queens implements Problem
             }
         };
         solver.printAll();
-        System.out.print("\n======================\n");
+        startClock();
         if (solver.runSolver())
+        {
+            stopClock();
+            double runTime = (stop - start) / 1000000000;
             System.out.print("========SOLVED========\n");
+            
+            System.out.print("====Time (seconds): " + Double.toString(runTime) + " =====\n");
+        }
         else 
             System.out.print("=====NO SOLUTION======\n");
-        solver.printAll();               
+        solver.printAll();
+    }
+    
+    
+    public static void main(String[] args)
+    {
+        final Problem queensProblem = new Queens(1);
+        solveAndPrint(queensProblem);
+        
+        final Problem queensProblem2 = new Queens(2);
+        solveAndPrint(queensProblem2);
+        
+        final Problem queensProblem3 = new Queens(3);
+        solveAndPrint(queensProblem3);
+        
+        final Problem queensProblem4 = new Queens(4);
+        solveAndPrint(queensProblem4);
+        
+        final Problem queensProblem8 = new Queens(18);
+        solveAndPrint(queensProblem8);
     }
 }
 
