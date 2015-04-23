@@ -23,7 +23,33 @@ public class Sudoku implements Problem
         // makes 0-80 variables with domain 1-9
         for (int i = 0; i < (SIZE * SIZE); i++)
         {
-            variables.add(new Variable(domain, i));
+            variables.add(new Variable(domain, i, 0));
+        }
+        generate();
+    }
+    
+    public Sudoku(int[] board)
+    {
+        constraints = new ArrayList<Constraint>();
+        variables = new ArrayList<Variable>();
+        
+        // domain goes from 1 to SIZE (9)
+        final int[] domain = new int[SIZE];
+        for (int i = 1; i <= SIZE; i++)
+        {
+            domain[i - 1] = i;
+        }
+        
+        // makes 0-80 variables with domain 1-9
+        for (int i = 0; i < (SIZE * SIZE); i++)
+        {
+            variables.add(new Variable(domain, i, 0));
+        }
+        
+        for (int i = 0; i < board.length; i++)
+        {
+            if (board[i] != 0)
+                variables.get(i).setValue(board[i]);
         }
         generate();
     }
@@ -148,10 +174,29 @@ public class Sudoku implements Problem
         final Problem sudokuProblem = new Sudoku();
         final Solver solver = new BacktrackSolver(sudokuProblem);
         solver.printAll();
-        System.out.print("\n ================== \n");
+        System.out.print("\n======================\n");
         if (solver.runSolver())
-            System.out.print("\n==============\nSOLVED\n=============\n");
+            System.out.print("========SOLVED========\n");
+        else 
+            System.out.print("=====NO SOLUTION======\n");
         solver.printAll();
+        
+        System.out.print("\n========NEW BOARD========\n\n");
+        
+        int[] board2 = new int[81];
+        board2[0] = 4;
+        board2[1] = 5;
+        board2[2] = 8;
+        
+        final Problem sudokuProblem2 = new Sudoku(board2);
+        final Solver solver2 = new BacktrackSolver(sudokuProblem2);
+        solver2.printAll();
+        System.out.print("\n======================\n");
+        if (solver2.runSolver())
+            System.out.print("========SOLVED========\n");
+        else 
+            System.out.print("======NO SOLUTION=====\n");
+        solver2.printAll();
     }
 }
 

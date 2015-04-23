@@ -12,12 +12,12 @@ public class Variable
     private int value;
     private int previousVal;
     
-    public Variable(int[] domainParam, int id)
+    public Variable(int[] domainParam, int id, int val)
     {
         domain = domainParam;
         name = Integer.toString(id);
         previousVal = 0;
-        value = 0;
+        value = val;
     }
     
     public void setValue(int valToSet)
