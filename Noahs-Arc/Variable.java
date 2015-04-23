@@ -10,22 +10,37 @@ public class Variable
     private int[] domain;
     private String name;
     private int value;
+    private int previousVal;
     
     public Variable(int[] domainParam, int id)
     {
         domain = domainParam;
         name = Integer.toString(id);
+        previousVal = 0;
+        value = 0;
     }
     
     public void setValue(int valToSet)
     {
+        previousVal = value;
         value = valToSet;
+    }
+    
+    public boolean hasValue()
+    {
+        return value != 0;  
     }
     
     public int[] getDomain()
     {
         return domain;
     }
+    
+    public void setDomain(int[] newDomain)
+    {
+        domain = newDomain;
+    }
+    
     
     public String getName() 
     {
@@ -35,6 +50,11 @@ public class Variable
     public int getValue()
     {
         return value;
+    }
+    
+    public int getPrevious()
+    {
+        return previousVal;
     }
 
 }

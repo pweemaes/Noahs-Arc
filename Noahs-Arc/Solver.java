@@ -8,4 +8,6 @@ public interface Solver
     public boolean runSolver();
     
     public Variable getSolution(int varPos);
+    
+    public void printAll();
 }

@@ -5,7 +5,7 @@ import java.util.*;
 public class Sudoku implements Problem
 {
     private final static int SIZE = 9;
-    private final Collection<Constraint> constraints;
+    private final List<Constraint> constraints;
     private final List<Variable> variables;
     
     public Sudoku()
@@ -73,19 +73,21 @@ public class Sudoku implements Problem
                 @Override
                 public boolean check()
                 {
-                    // Set.add returns false if the value already exists in the set.
                     // we can use this to check if all values in the constraint are different
                     Set<Integer> seen = new HashSet<Integer>();
+                    int needed = SIZE;
                     for (int i = 0; i < SIZE; i++)
                     {
-                        if (seen.add(getVariable(i).getValue()))
-                            continue;
+                        // if we have no value, we must pretend we see a new value anyways
+                        if (getVariable(i).hasValue())
+                            seen.add(getVariable(i).getValue());  
                         else
-                            return false;
+                            needed--;
                     }
-                    return true;
+                    return seen.size() >= needed;
                 }
             });
+            /**
             constraints.add(new Constraint(cols[i])
             {
                 @Override
@@ -94,14 +96,16 @@ public class Sudoku implements Problem
                     // Set.add returns false if the value already exists in the set.
                     // we can use this to check if all values in the constraint are different
                     Set<Integer> seen = new HashSet<Integer>();
+                    int needed = 9;
                     for (int i = 0; i < SIZE; i++)
                     {
-                        if (seen.add(getVariable(i).getValue()))
-                            continue;
+                        // if we have no value, we must pretend we see a new value anyways
+                        if (! getVariable(i).hasValue())
+                            needed--;
                         else
-                            return false;
+                            seen.add(getVariable(i).getValue());
                     }
-                    return true;
+                    return seen.size() == needed;
                 }
             });
             constraints.add(new Constraint(boxes[i])
@@ -112,39 +116,41 @@ public class Sudoku implements Problem
                     // Set.add returns false if the value already exists in the set.
                     // we can use this to check if all values in the constraint are different
                     Set<Integer> seen = new HashSet<Integer>();
+                    int needed = 9;
                     for (int i = 0; i < SIZE; i++)
                     {
-                        if (seen.add(getVariable(i).getValue()))
-                            continue;
+                        // if we have no value, we must pretend we see a new value anyways
+                        if (! getVariable(i).hasValue())
+                            needed--;
                         else
-                            return false;
+                            seen.add(getVariable(i).getValue());
                     }
-                    return true;
+                    return seen.size() == needed;
                 }
             });
+            */
         }
     }
     
     @Override
-    public Collection<Constraint> getConstraints() {
+    public List<Constraint> getConstraints() {
         return constraints;
     }
     @Override
     public List<Variable> getVariables() {
         return variables;
     }
+    
+    
     public static void main(String[] args)
     {
         final Problem sudokuProblem = new Sudoku();
         final Solver solver = new BacktrackSolver(sudokuProblem);
-        solver.runSolver();
-        
-        /** need better way to display
-        for (Variable v : sudokuProblem.getVariables()) {
-            System.out
-                    .println(v + ": " + solver.getSolution());
-        }
-        */
+        solver.printAll();
+        System.out.print("\n ================== \n");
+        if (solver.runSolver())
+            System.out.print("\n==============\nSOLVED\n=============\n");
+        solver.printAll();
     }
 }
 

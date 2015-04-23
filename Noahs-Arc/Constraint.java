@@ -16,6 +16,9 @@ public class Constraint
     { return false;
     }
     
+    public Variable[] getVariables()
+    { return appliesTo;
+    }
     
     public Variable getVariable(int variablePosition)
     { return appliesTo[variablePosition];

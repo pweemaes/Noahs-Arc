@@ -15,4 +15,8 @@ public class AbstractSolver implements Solver
     public Variable getSolution (int varPos)
     { return null;
     }
+    
+    public void printAll()
+    {
+    }
 }
