@@ -16,14 +16,19 @@ public class AC3Solver extends BacktrackSolver
     private boolean AC3() 
     {
         List<Constraint> arcs = constraints;
-        boolean consistent = true;
-        while (arcs.size() > 0 && consistent)
+        while (arcs.size() > 0)
         {
             Constraint current = arcs.get(0);
             arcs.remove(current);
-            consistent = ! revise(current);
+            if (revise(current))
+            {
+                //add opposite constraint to arcs... yikes
+                arcs.add(current);
+            }
+            else
+                return false;
         }
-        return consistent;
+        return true;
     }
     
     private boolean revise(Constraint current)
