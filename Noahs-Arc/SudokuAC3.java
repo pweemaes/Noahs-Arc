@@ -59,8 +59,15 @@ public class SudokuAC3 implements Problem
         
     @Override
     public void generate() 
+    {              
+        for (int i = 0; i < SIZE; i++)
+        {
+            makeBinaryConstraints(i);
+        }
+    }
+    
+    private void makeBinaryConstraints(int n)
     {
-        
         Variable[][] rows = new Variable[SIZE][SIZE];
         for (int i = 0; i < SIZE; i++)
         {
@@ -97,71 +104,43 @@ public class SudokuAC3 implements Problem
         }
         
         for (int i = 0; i < SIZE; i++)
-        {
-           
-            constraints.add(new Constraint(rows[i])
+        {   
+            for (int j = i + 1; j < SIZE; j++)
             {
-                @Override
-                public boolean check()
+                constraints.add(new Constraint(new Variable[]{rows[n][i], rows[n][j]})
                 {
-                    // we can use this to check if all values in the constraint are different
-                    Set<Integer> seen = new HashSet<Integer>();
-                    int needed = SIZE;
-                    for (int i = 0; i < SIZE; i++)
+                    @Override
+                    public boolean check()
                     {
-                        // if we have no value, we must pretend we see a new value anyways
-                        if (getVariable(i).hasValue())
-                            seen.add(getVariable(i).getValue());  
-                        else
-                            needed--;
+                        // we can use this to check if all values in the constraint are different
+                        return (! getVariable(0).hasValue() || ! getVariable(1).hasValue()) ||
+                        (getVariable(0).getValue() != getVariable(1).getValue());
                     }
-                    return seen.size() >= needed;
-                }
-            });
-            
-            /**
-            constraints.add(new Constraint(cols[i])
-            {
-                @Override
-                public boolean check()
+                });
+                constraints.add(new Constraint(new Variable[]{cols[n][i], cols[n][j]})
                 {
-                    // we can use this to check if all values in the constraint are different
-                    Set<Integer> seen = new HashSet<Integer>();
-                    int needed = SIZE;
-                    for (int i = 0; i < SIZE; i++)
+                    @Override
+                    public boolean check()
                     {
-                        // if we have no value, we must pretend we see a new value anyways
-                        if (getVariable(i).hasValue())
-                            seen.add(getVariable(i).getValue());  
-                        else
-                            needed--;
+                        // we can use this to check if all values in the constraint are different
+                        return (! getVariable(0).hasValue() || ! getVariable(1).hasValue()) ||
+                        (getVariable(0).getValue() != getVariable(1).getValue());
                     }
-                    return seen.size() >= needed;
-                }
-            });
-            
-            constraints.add(new Constraint(boxes[i])
-            {
-                @Override
-                public boolean check()
+                });
+                
+                constraints.add(new Constraint(new Variable[]{boxes[n][i], boxes[n][j]})
                 {
-                    // we can use this to check if all values in the constraint are different
-                    Set<Integer> seen = new HashSet<Integer>();
-                    int needed = SIZE;
-                    for (int i = 0; i < SIZE; i++)
+                    @Override
+                    public boolean check()
                     {
-                        // if we have no value, we must pretend we see a new value anyways
-                        if (getVariable(i).hasValue())
-                            seen.add(getVariable(i).getValue());  
-                        else
-                            needed--;
+                        // we can use this to check if all values in the constraint are different
+                        return (! getVariable(0).hasValue() || ! getVariable(1).hasValue()) ||
+                        (getVariable(0).getValue() != getVariable(1).getValue());
                     }
-                    return seen.size() >= needed;
-                }
-            });
-            */
-            
+                });
+            }
         }
+        
     }
     
     @Override

@@ -1,8 +1,8 @@
 import java.util.*;
 /**
- * Queens
+ * QueensAC3
  */
-public class Queens implements Problem
+public class QueensAC3 implements Problem
 {
     private int SIZE;
     private final List<Constraint> constraints;
@@ -10,7 +10,7 @@ public class Queens implements Problem
     static double start = 0.0;
     static double stop = 0.0;
     
-    public Queens()
+    public QueensAC3()
     {
         constraints = new ArrayList<Constraint>();
         variables = new ArrayList<Variable>();
@@ -18,7 +18,7 @@ public class Queens implements Problem
         generate();
     }
     
-    public Queens(int n)
+    public QueensAC3(int n)
     {
         constraints = new ArrayList<Constraint>();
         variables = new ArrayList<Variable>();
@@ -88,7 +88,7 @@ public class Queens implements Problem
     
     public static void solveAndPrint(Problem queensProblem)
     {
-        final Solver solver = new BacktrackSolver(queensProblem)
+        final Solver solver = new AC3Solver(queensProblem)
         {
             @Override
             public void printAll()
@@ -135,19 +135,19 @@ public class Queens implements Problem
     
     public static void main(String[] args)
     {
-        final Problem queensProblem = new Queens();
+        final Problem queensProblem = new QueensAC3();
         solveAndPrint(queensProblem);
         /**
-        final Problem queensProblem2 = new Queens(2);
+        final Problem queensProblem2 = new QueensAC3(2);
         solveAndPrint(queensProblem2);
         
-        final Problem queensProblem3 = new Queens(3);
+        final Problem queensProblem3 = new QueensAC3(3);
         solveAndPrint(queensProblem3);
         
-        final Problem queensProblem4 = new Queens(4);
+        final Problem queensProblem4 = new QueensAC3(4);
         solveAndPrint(queensProblem4);
         
-        final Problem queensProblem8 = new Queens(18);
+        final Problem queensProblem8 = new QueensAC3(18);
         solveAndPrint(queensProblem8);
         */
     }

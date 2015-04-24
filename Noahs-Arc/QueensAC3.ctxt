@@ -1,8 +1,8 @@
 #BlueJ class context
 comment0.params=
-comment0.target=Queens()
+comment0.target=QueensAC3()
 comment1.params=n
-comment1.target=Queens(int)
+comment1.target=QueensAC3(int)
 comment10.params=args
 comment10.target=void\ main(java.lang.String[])
 comment2.params=
