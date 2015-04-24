@@ -1,20 +1,70 @@
 import java.util.*;
 /**
- * Backtracking algorithm implemented here
+ * Arc Consistency (3 algorithm implemented here
  */
-public class BacktrackSolver implements Solver
+public class AC3Solver implements Solver
 {
     private final List<Constraint> constraints;
     private final List<Variable> variables;
-    public BacktrackSolver(Problem problem)
+    public AC3Solver(Problem problem)
     {
         constraints = problem.getConstraints();
         variables = problem.getVariables();
     }
     
+    private boolean AC3() 
+    {
+        List<Constraint> arcs = constraints;
+        boolean consistent = true;
+        while (arcs.size() > 0 && consistent)
+        {
+            Constraint current = arcs.get(0);
+            arcs.remove(current);
+            consistent = revise(current);
+        }
+        return consistent;
+    }
+    
+    private boolean revise(Constraint current)
+    {
+        Variable[] vars = current.getVariables();
+        boolean deleted = false;
+        for (int i = 0; i < vars.length; i++)
+        {
+            Variable currentVar = vars[i];
+            for (int j = 0; j < currentVar.getDomain().size(); j++)
+            {
+                for (int k = 0; k < vars.length; k++)
+                {
+                    if (k != i)
+                    {
+                        Variable currentChangingVar = vars[k];
+                        int changingVarInit = currentChangingVar.getValue();
+                        for (int l = 0; l < currentChangingVar.getDomain().size(); l++)
+                        {
+                            currentChangingVar.setValue(l);
+                            for (int m = 0; m < 
+                            ArrayList<Constraint> toTest = new ArrayList<Constraint>();
+                            toTest.add(current);
+                            if (! constraintsSatisfied(toTest))
+                            {
+                                currentChangingVar.setValue(changingVarInit);
+                                currentChangingVar.removeFromDomain(l);
+                                deleted = true;
+                            }  
+                            currentChangingVar.setValue(changingVarInit);
+                        }
+                    }
+                }
+            }
+        }
+        return deleted;
+    }
+    
     // returns true if a valid solution was found. if not returns false
     public boolean runSolver()
     {
+        AC3();
         Variable current = getUnassignedVar();
         if (current == null)
             return true;

@@ -1,14 +1,14 @@
 #BlueJ class context
 comment0.params=domainParam\ id
-comment0.target=Variable(int[],\ int)
+comment0.target=Variable(java.util.List,\ int)
 comment1.params=valToSet
 comment1.target=void\ setValue(int)
 comment2.params=
 comment2.target=boolean\ hasValue()
 comment3.params=
-comment3.target=int[]\ getDomain()
-comment4.params=newDomain
-comment4.target=void\ setDomain(int[])
+comment3.target=java.util.List\ getDomain()
+comment4.params=n
+comment4.target=void\ removeFromDomain(int)
 comment5.params=
 comment5.target=java.lang.String\ getName()
 comment6.params=

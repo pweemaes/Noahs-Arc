@@ -29,11 +29,11 @@ public class Queens implements Problem
     @Override
     public void generate() 
     {
-        // domain goes from 0 to SIZE-1
-        final int[] domain = new int[SIZE];
+        // domain goes from 0 to SIZE-1        
+        List<Integer> domain = new ArrayList<Integer>();
         for (int i = 0; i < SIZE; i++)
         {
-            domain[i] = i;
+            domain.add(i);
         }
         
         // makes SIZE variables with domain 0 to SIZE-1
@@ -144,9 +144,9 @@ public class Queens implements Problem
     
     public static void main(String[] args)
     {
-        final Problem queensProblem = new Queens(1);
+        final Problem queensProblem = new Queens();
         solveAndPrint(queensProblem);
-        
+        /**
         final Problem queensProblem2 = new Queens(2);
         solveAndPrint(queensProblem2);
         
@@ -158,6 +158,7 @@ public class Queens implements Problem
         
         final Problem queensProblem8 = new Queens(18);
         solveAndPrint(queensProblem8);
+        */
     }
 }
 
