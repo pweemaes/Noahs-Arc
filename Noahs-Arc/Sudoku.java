@@ -227,16 +227,13 @@ public class Sudoku implements Problem
         
         System.out.print("\n========NEW BOARD========\n\n");
         
-        /**
         int[] board2 = new int[81];
         board2[0] = 4;
         board2[1] = 5;
         board2[2] = 8;
         
         final Problem sudokuProblem2 = new Sudoku(board2);
-        solveAndPrint(sudokuProblem2);
-        */
-        
+        solveAndPrint(sudokuProblem2);        
     }
 }
 
