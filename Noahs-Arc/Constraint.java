@@ -10,8 +10,8 @@ public class Constraint
     
     public Constraint(Variable[] variables)
     {
-        Variable first = variables[0];
-        Variable second = variables[1];
+        first = variables[0];
+        second = variables[1];
     }
     
     public Constraint(Variable one, Variable two)
