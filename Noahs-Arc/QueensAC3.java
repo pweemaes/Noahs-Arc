@@ -85,7 +85,7 @@ public class QueensAC3 implements Problem
         stop = System.nanoTime();
     }
     
-    public static void solveAndPrint(Problem queensProblem)
+    public static double solveAndPrint(Problem queensProblem)
     {
         final Solver solver = new AC3Solver(queensProblem)
         {
@@ -116,6 +116,7 @@ public class QueensAC3 implements Problem
                 }
             }
         };
+        System.out.println("=========BOARD============");
         solver.printAll();
         startClock();
         if (solver.runSolver())
@@ -124,11 +125,12 @@ public class QueensAC3 implements Problem
             double runTime = (stop - start) / 1000000000;
             System.out.print("========SOLVED========\n");
             
-            System.out.print("====Time (seconds): " + Double.toString(runTime) + " =====\n");
-        }
-        else 
-            System.out.print("=====NO SOLUTION======\n");
-        solver.printAll();
+            System.out.print("====Time (seconds): " + Double.toString(runTime) + " =====\n\n");
+            solver.printAll();
+            return runTime;
+        }       
+        System.out.print("=====NO SOLUTION======\n");
+        return 0.0;
     }
     
     

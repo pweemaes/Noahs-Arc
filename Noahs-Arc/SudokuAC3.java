@@ -50,7 +50,13 @@ public class SudokuAC3 implements Problem
         for (int i = 0; i < board.length; i++)
         {
             if (board[i] != 0)
-                variables.get(i).setValue(board[i]);
+            {
+                Variable current = variables.get(i);
+                current.setValue(board[i]);
+                List<Integer> domain = new ArrayList<Integer>();
+                domain.add(board[i]);
+                current.setDomain(domain);
+            }
         }
         generate();
     }
@@ -160,7 +166,7 @@ public class SudokuAC3 implements Problem
         stop = System.nanoTime();
     }
     
-    public static void solveAndPrint(Problem sudokuProblem)
+    public static double solveAndPrint(Problem sudokuProblem)
     {
         final Solver solver = new AC3Solver(sudokuProblem)
         {
@@ -183,6 +189,7 @@ public class SudokuAC3 implements Problem
                 }
             }
         };
+        System.out.println("=========BOARD============");
         solver.printAll();
         startClock();
         if (solver.runSolver())
@@ -191,11 +198,12 @@ public class SudokuAC3 implements Problem
             double runTime = (stop - start) / 1000000000;
             System.out.print("========SOLVED========\n");
             
-            System.out.print("====Time (seconds): " + Double.toString(runTime) + " =====\n");
-        }
-        else 
-            System.out.print("=====NO SOLUTION======\n");
-        solver.printAll();
+            System.out.print("====Time (seconds): " + Double.toString(runTime) + " =====\n\n");
+            solver.printAll();
+            return runTime;
+        } 
+        System.out.print("=====NO SOLUTION======\n");
+        return 0.0;        
     }
     
     public static void main(String[] args)

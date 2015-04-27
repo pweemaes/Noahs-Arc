@@ -66,7 +66,8 @@ public class Variable
 
     public void printDomain()
     {
-        System.out.print(Arrays.toString(domain.toArray()));
+        System.out.print(getName() + ": ");
+        System.out.print(Arrays.toString(domain.toArray()) + "\n");
     }
     
 }

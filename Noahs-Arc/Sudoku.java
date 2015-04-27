@@ -22,7 +22,7 @@ public class Sudoku implements Problem
         {
             // domain goes from 1 to SIZE        
             List<Integer> domain = new ArrayList<Integer>();
-            for (int j = 0; j < SIZE; j++)
+            for (int j = 1; j <= SIZE; j++)
             {
                 domain.add(j);
             }
@@ -51,7 +51,13 @@ public class Sudoku implements Problem
         for (int i = 0; i < board.length; i++)
         {
             if (board[i] != 0)
-                variables.get(i).setValue(board[i]);
+            {
+                Variable current = variables.get(i);
+                current.setValue(board[i]);
+                List<Integer> domain = new ArrayList<Integer>();
+                domain.add(board[i]);
+                current.setDomain(domain);
+            }
         }
         generate();
     }
@@ -162,7 +168,7 @@ public class Sudoku implements Problem
         stop = System.nanoTime();
     }
     
-    public static void solveAndPrint(Problem sudokuProblem)
+    public static double solveAndPrint(Problem sudokuProblem)
     {
         final Solver solver = new BacktrackSolver(sudokuProblem)
         {
@@ -185,6 +191,7 @@ public class Sudoku implements Problem
                 }
             }
         };
+        System.out.println("=========BOARD============");
         solver.printAll();
         startClock();
         if (solver.runSolver())
@@ -193,11 +200,12 @@ public class Sudoku implements Problem
             double runTime = (stop - start) / 1000000000;
             System.out.print("========SOLVED========\n");
             
-            System.out.print("====Time (seconds): " + Double.toString(runTime) + " =====\n");
+            System.out.print("====Time (seconds): " + Double.toString(runTime) + " =====\n\n");
+            solver.printAll();
+            return runTime;
         }
-        else 
-            System.out.print("=====NO SOLUTION======\n");
-        solver.printAll();
+        System.out.print("=====NO SOLUTION======\n");
+        return 0.0;        
     }
     
     public static void main(String[] args)

@@ -85,6 +85,9 @@ public class AC3Solver implements Solver
             }
             var0.setValue(initVal0);
         }
+        var0.printDomain();
+        var1.printDomain();
+        System.out.print("\n");
         return deleted;
     }
     
