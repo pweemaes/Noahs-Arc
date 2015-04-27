@@ -18,9 +18,9 @@ public class BacktrackSolver implements Solver
         Variable current = getUnassignedVar();
         if (current == null)
             return true;
-        for (int i = 0; i < current.getDomain().length; i++)
+        for (int i = 0; i < current.getDomain().size(); i++)
         {
-            int newval = current.getDomain()[i];
+            int newval = current.getDomain().get(i);
             current.setValue(newval);
             if (constraintsSatisfied(constraintsWithAnyVals()))
             {
@@ -38,7 +38,7 @@ public class BacktrackSolver implements Solver
     }
     
     // returns first unassigned variable, null means all are assigned
-    private Variable getUnassignedVar()
+    public Variable getUnassignedVar()
     {
         for (int i = 0; i < variables.size(); i++)
         {
@@ -50,7 +50,7 @@ public class BacktrackSolver implements Solver
         return null;
     }
     
-    private boolean constraintHasAnyVals(Constraint c)
+    public boolean constraintHasAnyVals(Constraint c)
     {
         Variable[] vars = c.getVariables();
         for (int i = 0; i < vars.length; i++)
@@ -63,7 +63,7 @@ public class BacktrackSolver implements Solver
         return false;
     }
     
-    private List<Constraint> constraintsWithAnyVals()
+    public List<Constraint> constraintsWithAnyVals()
     {
         List<Constraint> applicable = new ArrayList<Constraint>();
         for (int i = 0; i < constraints.size(); i++)
@@ -74,7 +74,7 @@ public class BacktrackSolver implements Solver
         return applicable;
     }
     
-    private boolean constraintsSatisfied(List<Constraint> cList)
+    public boolean constraintsSatisfied(List<Constraint> cList)
     {
         for (int i = 0; i < cList.size(); i++)
         {
