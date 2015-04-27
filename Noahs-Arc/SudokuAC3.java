@@ -1,8 +1,8 @@
 import java.util.*;
 /**
- * Sudoku
+ * SudokuAC3
  */
-public class Sudoku implements Problem
+public class SudokuAC3 implements Problem
 {
     private final static int SIZE = 9;
     private final static int SQRTSIZE = 3;
@@ -11,18 +11,17 @@ public class Sudoku implements Problem
     static double start = 0.0;
     static double stop = 0.0;
     
-    public Sudoku()
+    public SudokuAC3()
     {
         constraints = new ArrayList<Constraint>();
         variables = new ArrayList<Variable>();
-       
         
         // makes 0-80 variables with domain 1-SIZE
         for (int i = 0; i < (SIZE * SIZE); i++)
         {
-            // domain goes from 1 to SIZE        
+            // domain goes from 1 to SIZE
             List<Integer> domain = new ArrayList<Integer>();
-            for (int j = 0; j < SIZE; j++)
+            for (int j = 1; j <= SIZE; j++)
             {
                 domain.add(j);
             }
@@ -31,7 +30,7 @@ public class Sudoku implements Problem
         generate();
     }
     
-    public Sudoku(int[] board)
+    public SudokuAC3(int[] board)
     {
         constraints = new ArrayList<Constraint>();
         variables = new ArrayList<Variable>();
@@ -116,7 +115,6 @@ public class Sudoku implements Problem
                         (getVariable(0).getValue() != getVariable(1).getValue());
                     }
                 });
-
                 constraints.add(new Constraint(cols[n][i], cols[n][j])
                 {
                     @Override
@@ -164,7 +162,7 @@ public class Sudoku implements Problem
     
     public static void solveAndPrint(Problem sudokuProblem)
     {
-        final Solver solver = new BacktrackSolver(sudokuProblem)
+        final Solver solver = new AC3Solver(sudokuProblem)
         {
             @Override
             public void printAll()
@@ -202,17 +200,19 @@ public class Sudoku implements Problem
     
     public static void main(String[] args)
     {              
-        final Problem sudokuProblem = new Sudoku();
+        final Problem sudokuProblem = new SudokuAC3();
         solveAndPrint(sudokuProblem);
-        
+
         System.out.print("\n========NEW BOARD========\n\n");
+        
         int[] board2 = new int[81];
         board2[0] = 4;
         board2[1] = 5;
         board2[2] = 8;
         
         final Problem sudokuProblem2 = new Sudoku(board2);
-        solveAndPrint(sudokuProblem2);        
+        solveAndPrint(sudokuProblem2);
+        
     }
 }
 

@@ -5,11 +5,19 @@
  */
 public class Constraint
 {
-    private Variable[] appliesTo;
+    private Variable first;
+    private Variable second;
     
     public Constraint(Variable[] variables)
     {
-        appliesTo = variables;
+        first = variables[0];
+        second = variables[1];
+    }
+    
+    public Constraint(Variable one, Variable two)
+    {
+        first = one;
+        second = two;
     }
 
     public boolean check() 
@@ -17,11 +25,15 @@ public class Constraint
     }
     
     public Variable[] getVariables()
-    { return appliesTo;
+    { return new Variable[]{first, second};
     }
     
+    
     public Variable getVariable(int variablePosition)
-    { return appliesTo[variablePosition];
+    {   
+        if (variablePosition == 1)
+            return second;
+        return first;
     }
     
 }

@@ -1,8 +1,8 @@
 import java.util.*;
 /**
- * Queens
+ * QueensAC3
  */
-public class Queens implements Problem
+public class QueensAC3 implements Problem
 {
     private int SIZE;
     private final List<Constraint> constraints;
@@ -10,7 +10,7 @@ public class Queens implements Problem
     static double start = 0.0;
     static double stop = 0.0;
     
-    public Queens()
+    public QueensAC3()
     {
         constraints = new ArrayList<Constraint>();
         variables = new ArrayList<Variable>();
@@ -18,7 +18,7 @@ public class Queens implements Problem
         generate();
     }
     
-    public Queens(int n)
+    public QueensAC3(int n)
     {
         constraints = new ArrayList<Constraint>();
         variables = new ArrayList<Variable>();
@@ -29,8 +29,6 @@ public class Queens implements Problem
     @Override
     public void generate() 
     {
-       
-        
         // makes SIZE variables with domain 0 to SIZE-1
         for (int i = 0; i < SIZE; i++)
         {
@@ -89,7 +87,7 @@ public class Queens implements Problem
     
     public static void solveAndPrint(Problem queensProblem)
     {
-        final Solver solver = new BacktrackSolver(queensProblem)
+        final Solver solver = new AC3Solver(queensProblem)
         {
             @Override
             public void printAll()
@@ -135,13 +133,22 @@ public class Queens implements Problem
     
     
     public static void main(String[] args)
-    {      
-        final Problem queensProblem4 = new Queens();
+    {
+        final Problem queensProblem = new QueensAC3();
+        solveAndPrint(queensProblem);
+        /**
+        final Problem queensProblem2 = new QueensAC3(2);
+        solveAndPrint(queensProblem2);
+        
+        final Problem queensProblem3 = new QueensAC3(3);
+        solveAndPrint(queensProblem3);
+        
+        final Problem queensProblem4 = new QueensAC3(4);
         solveAndPrint(queensProblem4);
         
-        System.out.println("======NEW BOARD=======");
-        final Problem queensProblem8 = new Queens(8);
+        final Problem queensProblem8 = new QueensAC3(18);
         solveAndPrint(queensProblem8);
+        */
     }
 }
 

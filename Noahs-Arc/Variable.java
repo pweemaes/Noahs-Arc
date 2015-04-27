@@ -1,3 +1,4 @@
+import java.util.*;
 /*
  * Write a description of class Variable here.
  * 
@@ -7,12 +8,12 @@
 public class Variable
 {
     // instance variables - replace the example below with your own
-    private int[] domain;
+    private List<Integer> domain;
     private String name;
     private int value;
     private int previousVal;
     
-    public Variable(int[] domainParam, int id)
+    public Variable(List<Integer> domainParam, int id)
     {
         domain = domainParam;
         name = Integer.toString(id);
@@ -31,14 +32,20 @@ public class Variable
         return value != -1;  
     }
     
-    public int[] getDomain()
+    public List<Integer> getDomain()
     {
         return domain;
     }
     
-    public void setDomain(int[] newDomain)
+    public void setDomain(List<Integer> newDomain)
     {
         domain = newDomain;
+    }
+    
+    
+    public void removeFromDomain(int n)
+    {
+        domain.remove(n);
     }
     
     
@@ -57,4 +64,9 @@ public class Variable
         return previousVal;
     }
 
+    public void printDomain()
+    {
+        System.out.print(Arrays.toString(domain.toArray()));
+    }
+    
 }
