@@ -206,6 +206,7 @@ public class Sudoku implements Problem
         solveAndPrint(sudokuProblem);
         
         System.out.print("\n========NEW BOARD========\n\n");
+
         int[] board2 = new int[81];
         board2[0] = 4;
         board2[1] = 5;
