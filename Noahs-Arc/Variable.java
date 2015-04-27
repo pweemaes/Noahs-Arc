@@ -59,4 +59,9 @@ public class Variable
         return previousVal;
     }
 
+    public void printDomain()
+    {
+        System.out.print(Arrays.toString(domain.toArray()));
+    }
+    
 }

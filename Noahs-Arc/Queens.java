@@ -29,16 +29,17 @@ public class Queens implements Problem
     @Override
     public void generate() 
     {
-        // domain goes from 0 to SIZE-1        
-        List<Integer> domain = new ArrayList<Integer>();
-        for (int i = 0; i < SIZE; i++)
-        {
-            domain.add(i);
-        }
+       
         
         // makes SIZE variables with domain 0 to SIZE-1
         for (int i = 0; i < SIZE; i++)
         {
+            // domain goes from 0 to SIZE-1        
+            List<Integer> domain = new ArrayList<Integer>();
+            for (int j = 0; j < SIZE; j++)
+            {
+                domain.add(j);
+            }
             variables.add(new Variable(domain, i));
         }
         
@@ -49,7 +50,7 @@ public class Queens implements Problem
             {
                 final int difference = Math.abs(j - i);  
                 
-                constraints.add(new Constraint(new Variable[]{variables.get(i),variables.get(j)})
+                constraints.add(new Constraint(variables.get(i),variables.get(j))
                 {
                     @Override
                     public boolean check()

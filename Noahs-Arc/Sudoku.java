@@ -15,17 +15,17 @@ public class Sudoku implements Problem
     {
         constraints = new ArrayList<Constraint>();
         variables = new ArrayList<Variable>();
-        
-        // domain goes from 1 to SIZE
-        List<Integer> domain = new ArrayList<Integer>();
-        for (int i = 1; i <= SIZE; i++)
-        {
-            domain.add(i);
-        }
+       
         
         // makes 0-80 variables with domain 1-SIZE
         for (int i = 0; i < (SIZE * SIZE); i++)
         {
+            // domain goes from 1 to SIZE        
+            List<Integer> domain = new ArrayList<Integer>();
+            for (int j = 0; j < SIZE; j++)
+            {
+                domain.add(j);
+            }
             variables.add(new Variable(domain, i));
         }
         generate();
@@ -36,16 +36,15 @@ public class Sudoku implements Problem
         constraints = new ArrayList<Constraint>();
         variables = new ArrayList<Variable>();
         
-        // domain goes from 1 to SIZE
-        List<Integer> domain = new ArrayList<Integer>();
-        for (int i = 1; i <= SIZE; i++)
-        {
-            domain.add(i);
-        }
-        
         // makes 0-80 variables with domain 1-SIZE
         for (int i = 0; i < (SIZE * SIZE); i++)
         {
+            // domain goes from 1 to SIZE
+            List<Integer> domain = new ArrayList<Integer>();
+            for (int j = 1; j <= SIZE; j++)
+            {
+                domain.add(j);
+            }
             variables.add(new Variable(domain, i));
         }
         
@@ -107,7 +106,7 @@ public class Sudoku implements Problem
         {   
             for (int j = i + 1; j < SIZE; j++)
             {
-                constraints.add(new Constraint(new Variable[]{rows[n][i], rows[n][j]})
+                constraints.add(new Constraint(rows[n][i], rows[n][j])
                 {
                     @Override
                     public boolean check()
@@ -118,7 +117,7 @@ public class Sudoku implements Problem
                     }
                 });
 
-                constraints.add(new Constraint(new Variable[]{cols[n][i], cols[n][j]})
+                constraints.add(new Constraint(cols[n][i], cols[n][j])
                 {
                     @Override
                     public boolean check()
@@ -129,7 +128,7 @@ public class Sudoku implements Problem
                     }
                 });
                 
-                constraints.add(new Constraint(new Variable[]{boxes[n][i], boxes[n][j]})
+                constraints.add(new Constraint(boxes[n][i], boxes[n][j])
                 {
                     @Override
                     public boolean check()
