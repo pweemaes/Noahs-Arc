@@ -202,7 +202,7 @@ public class SudokuAC3 implements Problem
     {              
         final Problem sudokuProblem = new SudokuAC3();
         solveAndPrint(sudokuProblem);
-        /**
+
         System.out.print("\n========NEW BOARD========\n\n");
         
         int[] board2 = new int[81];
@@ -212,7 +212,6 @@ public class SudokuAC3 implements Problem
         
         final Problem sudokuProblem2 = new Sudoku(board2);
         solveAndPrint(sudokuProblem2);
-        */
         
     }
 }

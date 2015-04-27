@@ -14,11 +14,14 @@ public class AC3Solver implements Solver
     
     private boolean AC3() 
     {
-        Set<Constraint> arcs = new HashSet<>(constraints);        
-        while (arcs.size() > 0)
+        Set<Constraint> arcs = new HashSet<>(constraints);    
+        boolean consistent = true;
+        while (arcs.size() > 0 && consistent)
         {
             Constraint current = arcs.iterator().next();
             arcs.remove(current);
+            consistent = revise(current);
+            /**
             if (revise(current))
             {
                 int domainX = current.getVariable(0).getDomain().size();
@@ -29,6 +32,7 @@ public class AC3Solver implements Solver
                     arcs.addAll(getAffectedConstraints(arcs, current));
                 }
             }
+            */
         }
         return true;
     }
@@ -62,8 +66,7 @@ public class AC3Solver implements Solver
         for (int i = 0; i < var0.getDomain().size(); i++)
         {
             int newVal0 = var0.getDomain().get(i);
-            var0.setValue(newVal0);
-            
+            var0.setValue(newVal0); 
             boolean satisfied = false;
             for (int j = 0; j < var1.getDomain().size(); j++)
             {
@@ -75,16 +78,13 @@ public class AC3Solver implements Solver
                 }  
                 var1.setValue(initVal1);
             }
-            if (!satisfied)
+            if (! satisfied)
             {
                 var0.removeFromDomain(i);
                 deleted = true;
             }
             var0.setValue(initVal0);
         }
-        var0.printDomain();
-        var1.printDomain();
-        System.out.println("AHHH");
         return deleted;
     }
     
@@ -92,8 +92,12 @@ public class AC3Solver implements Solver
     // returns true if a valid solution was found. if not returns false
     public boolean runSolver()
     {
-        if (AC3())
-            System.out.println("ac3 true");
+        AC3();
+        return solver();    
+    }
+    
+    private boolean solver()
+    {
         Variable current = getUnassignedVar();
         if (current == null)
             return true;
@@ -101,12 +105,19 @@ public class AC3Solver implements Solver
         {
             int newval = current.getDomain().get(i);
             current.setValue(newval);
+            int oldval = current.getPrevious();
+            List<Integer> originalDomain = current.getDomain();
+            List<Integer> newDomain = new ArrayList<Integer>();
+            newDomain.add(newval);
+            current.setDomain(newDomain);
+            AC3();
             if (constraintsSatisfied(constraintsWithAnyVals()))
             {
                 if (runSolver())
                     return true;  
             }
-            current.setValue(current.getPrevious());
+            current.setValue(oldval);
+            current.setDomain(originalDomain);
         }
         return false;
     }

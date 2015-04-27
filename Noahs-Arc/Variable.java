@@ -37,6 +37,11 @@ public class Variable
         return domain;
     }
     
+    public void setDomain(List<Integer> newDomain)
+    {
+        domain = newDomain;
+    }
+    
     
     public void removeFromDomain(int n)
     {
