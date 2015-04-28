@@ -208,10 +208,13 @@ public class SudokuAC3 implements Problem
     
     public static void main(String[] args)
     {              
+        /**
+         *
         final Problem sudokuProblem = new SudokuAC3();
         solveAndPrint(sudokuProblem);
 
         System.out.print("\n========NEW BOARD========\n\n");
+        */
         
         int[] board2 = new int[81];
         board2[0] = 4;

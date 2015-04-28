@@ -140,10 +140,11 @@ public class Queens implements Problem
     {      
         final Problem queensProblem4 = new Queens();
         solveAndPrint(queensProblem4);
-        
+        /**
         System.out.println("======NEW BOARD=======");
         final Problem queensProblem8 = new Queens(8);
         solveAndPrint(queensProblem8);
+        */
     }
 }
 

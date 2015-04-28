@@ -82,12 +82,10 @@ public class AC3Solver implements Solver
             {
                 var0.removeFromDomain(i);
                 deleted = true;
+                i--;
             }
             var0.setValue(initVal0);
         }
-        var0.printDomain();
-        var1.printDomain();
-        System.out.print("\n");
         return deleted;
     }
     
@@ -95,7 +93,6 @@ public class AC3Solver implements Solver
     // returns true if a valid solution was found. if not returns false
     public boolean runSolver()
     {
-        AC3();
         return solver();    
     }
     
@@ -113,13 +110,15 @@ public class AC3Solver implements Solver
             List<Integer> newDomain = new ArrayList<Integer>();
             newDomain.add(newval);
             current.setDomain(newDomain);
-            AC3();
+            
             if (constraintsSatisfied(constraintsWithAnyVals()))
             {
                 if (runSolver())
                     return true;  
             }
+            
             current.setValue(oldval);
+            AC3();
             current.setDomain(originalDomain);
         }
         return false;
