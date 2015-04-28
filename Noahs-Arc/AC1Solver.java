@@ -2,21 +2,23 @@ import java.util.*;
 /**
  * Arc Consistency (3) algorithm implemented here
  */
-public class AC3Solver implements Solver
+public class AC1Solver implements Solver
 {
     private final List<Constraint> constraints;
     private final List<Variable> variables;
-    public AC3Solver(Problem problem)
+    public AC1Solver(Problem problem)
     {
         constraints = problem.getConstraints();
         variables = problem.getVariables();
     }
     
-    private boolean AC3() 
+    private boolean AC1() 
     {
         Set<Constraint> arcs = new HashSet<>(constraints);    
-        while (arcs.size() > 0)
+        boolean changed = true;
+        while (arcs.size() > 0 && changed)
         {
+            changed = false;
             Constraint current = arcs.iterator().next();
             arcs.remove(current);
             
@@ -27,10 +29,9 @@ public class AC3Solver implements Solver
                     return false;
                 else
                 {
-                    arcs.addAll(getAffectedConstraints(arcs, current));
+                    changed = true;
                 }
             }
-            
         }
         return true;
     }
@@ -93,7 +94,7 @@ public class AC3Solver implements Solver
     // returns true if a valid solution was found. if not returns false
     public boolean runSolver()
     {
-        AC3();   
+        AC1();   
         return solver();
     }
     
@@ -116,7 +117,7 @@ public class AC3Solver implements Solver
             {
                 if (solver())
                 {
-                    AC3();
+                    AC1();
                     return true;  
                 }
             }
