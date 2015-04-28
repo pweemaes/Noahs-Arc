@@ -120,6 +120,11 @@ public class SudokuAC3 implements Problem
                         return (! getVariable(0).hasValue() || ! getVariable(1).hasValue()) ||
                         (getVariable(0).getValue() != getVariable(1).getValue());
                     }
+                    @Override
+                    public boolean checkWithValues(int one, int two)
+                    {
+                        return one == -1 || two == -1 || one != two;
+                    }
                 });
                 constraints.add(new Constraint(cols[n][i], cols[n][j])
                 {
@@ -129,6 +134,11 @@ public class SudokuAC3 implements Problem
                         // we can use this to check if all values in the constraint are different
                         return (! getVariable(0).hasValue() || ! getVariable(1).hasValue()) ||
                         (getVariable(0).getValue() != getVariable(1).getValue());
+                    }
+                    @Override
+                    public boolean checkWithValues(int one, int two)
+                    {
+                        return one == -1 || two == -1 || one != two;
                     }
                 });
                 
@@ -140,6 +150,11 @@ public class SudokuAC3 implements Problem
                         // we can use this to check if all values in the constraint are different
                         return (! getVariable(0).hasValue() || ! getVariable(1).hasValue()) ||
                         (getVariable(0).getValue() != getVariable(1).getValue());
+                    }
+                    @Override
+                    public boolean checkWithValues(int one, int two)
+                    {
+                        return one == -1 || two == -1 || one != two;
                     }
                 });
             }

@@ -16,29 +16,27 @@ public class AC3Solver implements Solver
     {
         Set<Constraint> arcs = new HashSet<>(constraints);    
         boolean consistent = true;
-        while (arcs.size() > 0 && consistent)
+        while (arcs.size() > 0)
         {
             Constraint current = arcs.iterator().next();
             arcs.remove(current);
-            consistent = revise(current);
-            /**
+            
             if (revise(current))
             {
                 int domainX = current.getVariable(0).getDomain().size();
                 if (domainX == 0)
-                    return false;
-                else
                 {
-                    arcs.addAll(getAffectedConstraints(arcs, current));
+                    System.out.println("domain empty");
+                    return false;
                 }
+                arcs.addAll(getAffectedConstraints(constraints, current));
             }
-            */
         }
         return true;
     }
     
     private Collection<Constraint> 
-        getAffectedConstraints(Set<Constraint> arcs, Constraint c)
+        getAffectedConstraints(List<Constraint> arcs, Constraint c)
     {
         Variable first = c.getVariable(0);
         
@@ -50,6 +48,7 @@ public class AC3Solver implements Solver
             Variable secondCheck = toCheck.getVariable(1);
             if (first == secondCheck)
             {
+                System.out.println("adding arc");
                 toReturn.add(toCheck);
             }
         }
@@ -66,28 +65,28 @@ public class AC3Solver implements Solver
         for (int i = 0; i < var0.getDomain().size(); i++)
         {
             int newVal0 = var0.getDomain().get(i);
-            var0.setValue(newVal0); 
-            boolean satisfied = false;
+            // var0.setValue(newVal0); 
+            boolean found = false;
             for (int j = 0; j < var1.getDomain().size(); j++)
             {
                 int newVal1 = var1.getDomain().get(j);
-                var1.setValue(newVal1);
-                if (current.check())
+                //var1.setValue(newVal1);
+                if (current.checkWithValues(newVal0, newVal1))
                 {
-                    satisfied = true;
+                    found = true;
+                    break;
                 }  
-                var1.setValue(initVal1);
+                //var1.setValue(initVal1);
             }
-            if (! satisfied)
+            if (! found)
             {
+                System.out.println("removing");
                 var0.removeFromDomain(i);
                 deleted = true;
             }
-            var0.setValue(initVal0);
+            // var0.setValue(initVal0);
+            printVariables();
         }
-        var0.printDomain();
-        var1.printDomain();
-        System.out.print("\n");
         return deleted;
     }
     
@@ -95,12 +94,12 @@ public class AC3Solver implements Solver
     // returns true if a valid solution was found. if not returns false
     public boolean runSolver()
     {
-        AC3();
         return solver();    
     }
     
     private boolean solver()
     {
+        
         Variable current = getUnassignedVar();
         if (current == null)
             return true;
@@ -113,14 +112,16 @@ public class AC3Solver implements Solver
             List<Integer> newDomain = new ArrayList<Integer>();
             newDomain.add(newval);
             current.setDomain(newDomain);
-            AC3();
+            
             if (constraintsSatisfied(constraintsWithAnyVals()))
             {
-                if (runSolver())
+                
+                if (solver())
                     return true;  
             }
             current.setValue(oldval);
             current.setDomain(originalDomain);
+            
         }
         return false;
     }
@@ -186,5 +187,13 @@ public class AC3Solver implements Solver
    
     public void printAll()
     {
+    }
+    
+    public void printVariables()
+    {
+        for (int i = 0; i < variables.size(); i++)
+        {
+            variables.get(i).printDomain();
+        }
     }
 }

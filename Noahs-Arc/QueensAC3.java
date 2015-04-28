@@ -60,6 +60,11 @@ public class QueensAC3 implements Problem
                                 (Math.abs(var1.getValue() - var0.getValue()) != difference); 
                         return true;
                     }
+                    @Override
+                    public boolean checkWithValues(int one, int two)
+                    {
+                        return (one != two) && Math.abs(one - two) != difference;
+                    }
                 });
             }
         }
@@ -136,7 +141,7 @@ public class QueensAC3 implements Problem
     
     public static void main(String[] args)
     {
-        final Problem queensProblem = new QueensAC3();
+        final Problem queensProblem = new QueensAC3(8);
         solveAndPrint(queensProblem);
         /**
         final Problem queensProblem2 = new QueensAC3(2);

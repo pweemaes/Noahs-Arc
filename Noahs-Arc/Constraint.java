@@ -24,6 +24,10 @@ public class Constraint
     { return false;
     }
     
+    public boolean checkWithValues(int one, int two)
+    { return false;
+    }
+    
     public Variable[] getVariables()
     { return new Variable[]{first, second};
     }
