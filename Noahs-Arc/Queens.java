@@ -138,7 +138,7 @@ public class Queens implements Problem
     
     public static void main(String[] args)
     {      
-        final Problem queensProblem4 = new Queens();
+        final Problem queensProblem4 = new Queens(20);
         solveAndPrint(queensProblem4);
         /**
         System.out.println("======NEW BOARD=======");

@@ -127,6 +127,57 @@ public class NoahsArc
         printLine();
         printLine();
         
+        System.out.print("Solve 'extreme' sudoku board using simple backtracking:\n\n");
+        
+        
+        int[] extremeBoard = new int[81];
+        extremeBoard[2] = 4;
+        extremeBoard[5] = 7;
+        extremeBoard[8] = 2;
+        extremeBoard[10] = 8;
+        extremeBoard[13] = 6;
+        extremeBoard[16] = 1;
+        extremeBoard[18] = 3;
+        extremeBoard[21] = 8;
+        extremeBoard[24] = 5;
+        extremeBoard[27] = 1;
+        extremeBoard[30] = 9;
+        extremeBoard[33] = 4;
+        extremeBoard[37] = 4;
+        extremeBoard[40] = 8;
+        extremeBoard[43] = 7;
+        extremeBoard[47] = 8;
+        extremeBoard[50] = 2;
+        extremeBoard[53] = 9;
+        extremeBoard[56] = 7;
+        extremeBoard[59] = 3;
+        extremeBoard[62] = 1;
+        extremeBoard[64] = 3;
+        extremeBoard[67] = 5;
+        extremeBoard[70] = 2;
+        extremeBoard[72] = 2;
+        extremeBoard[75] = 1;
+        extremeBoard[78] = 6;
+
+        Sudoku sudokuExtreme = new Sudoku(extremeBoard);
+        double sudokuExtremeBacktrackTime = sudokuBlank.solveAndPrint(sudokuExtreme);
+        printLine();
+        
+        System.out.print("Solve extreme sudoku board using AC1:\n\n");
+        
+        SudokuAC1 sudokuExtremeAC1 = new SudokuAC1(extremeBoard);
+        double sudokuExtremeAC1Time = sudokuEasyAC1.solveAndPrint(sudokuExtremeAC1);
+        
+        printLine();
+        
+        System.out.print("Solve extreme sudoku board using AC3:\n\n");
+        
+        SudokuAC3 sudokuExtremeAC3 = new SudokuAC3(extremeBoard);
+        double sudokuExtremeAC3Time = sudokuEasyAC3.solveAndPrint(sudokuExtremeAC3);
+        
+        printLine();
+        printLine();
+        
         System.out.print("Solve the n-queens problem of placing n number of queens\non a board of n x n size using backtracking:\n\n");
         
         Queens queens4 = new Queens();
@@ -186,6 +237,9 @@ public class NoahsArc
         System.out.print("\n\nHard Sudoku Backtrack:  " + sudokuHardBacktrackTime);
         System.out.print("\nHard Sudoku AC1:        " + sudokuHardAC1Time);
         System.out.print("\nHard Sudoku AC3:        " + sudokuHardAC3Time);
+        System.out.print("\n\nExtreme Sudoku Backtrack:  " + sudokuExtremeBacktrackTime);
+        System.out.print("\nExtreme Sudoku AC1:        " + sudokuExtremeAC1Time);
+        System.out.print("\nExtreme Sudoku AC3:        " + sudokuExtremeAC3Time);
         System.out.print("\n\n4x4 Queens Backtrack:   " + queens4BacktrackTime);
         System.out.print("\n4x4 Queens AC1:         " + queensAC1_4BacktrackTime);
         System.out.print("\n4x4 Queens AC3:         " + queensAC3_4BacktrackTime);

@@ -136,7 +136,7 @@ public class QueensAC3 implements Problem
     
     public static void main(String[] args)
     {
-        final Problem queensProblem = new QueensAC3(8);
+        final Problem queensProblem = new QueensAC3(20);
         solveAndPrint(queensProblem);
         /**
         final Problem queensProblem2 = new QueensAC3(2);
