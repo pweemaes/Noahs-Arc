@@ -138,13 +138,12 @@ public class Queens implements Problem
     
     public static void main(String[] args)
     {      
-        final Problem queensProblem4 = new Queens(8);
+        final Problem queensProblem4 = new Queens();
         solveAndPrint(queensProblem4);
-        /**
+        
         System.out.println("======NEW BOARD=======");
-        final Problem queensProblem8 = new Queens();
+        final Problem queensProblem8 = new Queens(8);
         solveAndPrint(queensProblem8);
-        */
     }
 }
 
