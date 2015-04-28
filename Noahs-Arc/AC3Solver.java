@@ -20,8 +20,7 @@ public class AC3Solver implements Solver
         {
             Constraint current = arcs.iterator().next();
             arcs.remove(current);
-            consistent = revise(current);
-            /**
+            
             if (revise(current))
             {
                 int domainX = current.getVariable(0).getDomain().size();
@@ -32,7 +31,7 @@ public class AC3Solver implements Solver
                     arcs.addAll(getAffectedConstraints(arcs, current));
                 }
             }
-            */
+            
         }
         return true;
     }
@@ -86,6 +85,8 @@ public class AC3Solver implements Solver
             }
             var0.setValue(initVal0);
         }
+        //var0.printDomain();
+        //var1.printDomain();
         return deleted;
     }
     
@@ -93,7 +94,8 @@ public class AC3Solver implements Solver
     // returns true if a valid solution was found. if not returns false
     public boolean runSolver()
     {
-        return solver();    
+        AC3();   
+        return solver();
     }
     
     private boolean solver()
@@ -113,12 +115,14 @@ public class AC3Solver implements Solver
             
             if (constraintsSatisfied(constraintsWithAnyVals()))
             {
-                if (runSolver())
+                if (solver())
+                {
+                    AC3();
                     return true;  
+                }
             }
             
             current.setValue(oldval);
-            AC3();
             current.setDomain(originalDomain);
         }
         return false;
