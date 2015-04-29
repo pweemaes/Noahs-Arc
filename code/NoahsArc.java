@@ -22,6 +22,15 @@ public class NoahsArc
         SudokuAC3 sudokuBlankAC3 = new SudokuAC3();
         double sudokuBlankAC3Time = sudokuBlankAC3.solveAndPrint(sudokuBlankAC3);
         
+        
+        printLine();
+        
+        System.out.print("\n\n=========Solve a blank sudoku board using AStar domain purging combined with backtracking:\n\n");
+        
+        SudokuAStar sudokuBlankAStar = new SudokuAStar();
+        double sudokuBlankAStarTime = sudokuBlankAStar.solveAndPrint(sudokuBlankAStar);
+        
+        
         printLine();
         // solve a sudoku with starting constraints.
         System.out.print("Solve easy sudoku board using simple backtracking:\n\n");
@@ -75,6 +84,13 @@ public class NoahsArc
         
         printLine();
         
+        System.out.print("Solve easy sudoku board using AStar:\n\n");
+        
+        SudokuAStar sudokuEasyAStar = new SudokuAStar(easyBoard);
+        double sudokuEasyAStarTime = sudokuEasyAStar.solveAndPrint(sudokuEasyAStar);
+        
+        printLine();
+        
         System.out.print("Solve hard sudoku board using simple backtracking:\n\n");
         
         
@@ -125,55 +141,11 @@ public class NoahsArc
         double sudokuHardAC3Time = sudokuEasyAC3.solveAndPrint(sudokuHardAC3);
         
         printLine();
-        printLine();
         
-        System.out.print("Solve 'extreme' sudoku board using simple backtracking:\n\n");
+        System.out.print("Solve hard sudoku board using AStar:\n\n");
         
-        
-        int[] extremeBoard = new int[81];
-        extremeBoard[2] = 4;
-        extremeBoard[5] = 7;
-        extremeBoard[8] = 2;
-        extremeBoard[10] = 8;
-        extremeBoard[13] = 6;
-        extremeBoard[16] = 1;
-        extremeBoard[18] = 3;
-        extremeBoard[21] = 8;
-        extremeBoard[24] = 5;
-        extremeBoard[27] = 1;
-        extremeBoard[30] = 9;
-        extremeBoard[33] = 4;
-        extremeBoard[37] = 4;
-        extremeBoard[40] = 8;
-        extremeBoard[43] = 7;
-        extremeBoard[47] = 8;
-        extremeBoard[50] = 2;
-        extremeBoard[53] = 9;
-        extremeBoard[56] = 7;
-        extremeBoard[59] = 3;
-        extremeBoard[62] = 1;
-        extremeBoard[64] = 3;
-        extremeBoard[67] = 5;
-        extremeBoard[70] = 2;
-        extremeBoard[72] = 2;
-        extremeBoard[75] = 1;
-        extremeBoard[78] = 6;
-
-        Sudoku sudokuExtreme = new Sudoku(extremeBoard);
-        double sudokuExtremeBacktrackTime = sudokuBlank.solveAndPrint(sudokuExtreme);
-        printLine();
-        
-        System.out.print("Solve extreme sudoku board using AC1:\n\n");
-        
-        SudokuAC1 sudokuExtremeAC1 = new SudokuAC1(extremeBoard);
-        double sudokuExtremeAC1Time = sudokuEasyAC1.solveAndPrint(sudokuExtremeAC1);
-        
-        printLine();
-        
-        System.out.print("Solve extreme sudoku board using AC3:\n\n");
-        
-        SudokuAC3 sudokuExtremeAC3 = new SudokuAC3(extremeBoard);
-        double sudokuExtremeAC3Time = sudokuEasyAC3.solveAndPrint(sudokuExtremeAC3);
+        SudokuAStar sudokuHardAStar = new SudokuAStar(hardBoard);
+        double sudokuHardAStarTime = sudokuEasyAStar.solveAndPrint(sudokuHardAStar);
         
         printLine();
         printLine();
@@ -227,28 +199,48 @@ public class NoahsArc
         
         printLine();
         
+        System.out.print("Solve the same boards using AStar:\n\n");
+        
+        QueensAStar queensAStar_4 = new QueensAStar();
+        double queensAStar_4BacktrackTime = queensAStar_4.solveAndPrint(queensAStar_4);
+        
+        printLine();
+        
+        QueensAStar queensAStar_8 = new QueensAStar(8);
+        double queensAStar_8BacktrackTime = queensAStar_8.solveAndPrint(queensAStar_8);
+        
+        printLine();
+        
+        QueensAStar queensAStar_15 = new QueensAStar(15);
+        double queensAStar_15BacktrackTime = queensAStar_15.solveAndPrint(queensAStar_15);
+        
+        printLine();
+        
         System.out.print("\nRunning Times:\n\n");
         System.out.print("Blank Sudoku Backtrack: " + sudokuBlankBacktrackTime);
         System.out.print("\nBlank Sudoku AC1:       " + sudokuBlankAC1Time);
         System.out.print("\nBlank Sudoku AC3:       " + sudokuBlankAC3Time);
+        System.out.print("\nBlank Sudoku AStar:     " + sudokuBlankAStarTime);
         System.out.print("\n\nEasy Sudoku Backtrack:  " + sudokuEasyBacktrackTime);
         System.out.print("\nEasy Sudoku AC1:        " + sudokuEasyAC1Time);
         System.out.print("\nEasy Sudoku AC3:        " + sudokuEasyAC3Time);
+        System.out.print("\nEasy Sudoku AStar:      " + sudokuEasyAStarTime);
         System.out.print("\n\nHard Sudoku Backtrack:  " + sudokuHardBacktrackTime);
         System.out.print("\nHard Sudoku AC1:        " + sudokuHardAC1Time);
         System.out.print("\nHard Sudoku AC3:        " + sudokuHardAC3Time);
-        System.out.print("\n\nExtreme Sudoku Backtrack:  " + sudokuExtremeBacktrackTime);
-        System.out.print("\nExtreme Sudoku AC1:        " + sudokuExtremeAC1Time);
-        System.out.print("\nExtreme Sudoku AC3:        " + sudokuExtremeAC3Time);
+        System.out.print("\nHard Sudoku AStar:      " + sudokuHardAStarTime);
         System.out.print("\n\n4x4 Queens Backtrack:   " + queens4BacktrackTime);
         System.out.print("\n4x4 Queens AC1:         " + queensAC1_4BacktrackTime);
         System.out.print("\n4x4 Queens AC3:         " + queensAC3_4BacktrackTime);
+        System.out.print("\n4x4 Queens AStar:       " + queensAStar_4BacktrackTime);
         System.out.print("\n\n8x8 Queens Backtrack:   " + queens8BacktrackTime);
         System.out.print("\n8x8 Queens AC1:         " + queensAC1_8BacktrackTime);
         System.out.print("\n8x8 Queens AC3:         " + queensAC3_8BacktrackTime);
+        System.out.print("\n8x8 Queens AStar:       " + queensAStar_8BacktrackTime);
         System.out.print("\n\n15x15 Queens Backtrack: " + queens15BacktrackTime);
         System.out.print("\n15x15 Queens AC1:       " + queensAC1_15BacktrackTime);
         System.out.print("\n15x15 Queens AC3:       " + queensAC3_15BacktrackTime);
+        System.out.print("\n15x15 Queens AStar:     " + queensAStar_15BacktrackTime);
         
         
         

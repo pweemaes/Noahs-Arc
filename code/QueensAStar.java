@@ -1,8 +1,8 @@
 import java.util.*;
 /**
- * QueensAC3
+ * QueensAStar
  */
-public class QueensAC3 implements Problem
+public class QueensAStar implements Problem
 {
     private int SIZE;
     private final List<Constraint> constraints;
@@ -10,7 +10,7 @@ public class QueensAC3 implements Problem
     static double start = 0.0;
     static double stop = 0.0;
     
-    public QueensAC3()
+    public QueensAStar()
     {
         constraints = new ArrayList<Constraint>();
         variables = new ArrayList<Variable>();
@@ -18,7 +18,7 @@ public class QueensAC3 implements Problem
         generate();
     }
     
-    public QueensAC3(int n)
+    public QueensAStar(int n)
     {
         constraints = new ArrayList<Constraint>();
         variables = new ArrayList<Variable>();
@@ -87,7 +87,7 @@ public class QueensAC3 implements Problem
     
     public static double solveAndPrint(Problem queensProblem)
     {
-        final Solver solver = new AC3Solver(queensProblem)
+        final Solver solver = new AStarSolver(queensProblem)
         {
             @Override
             public void printAll()
@@ -136,19 +136,19 @@ public class QueensAC3 implements Problem
     
     public static void main(String[] args)
     {
-        final Problem queensProblem = new QueensAC3(8);
+        final Problem queensProblem = new QueensAStar(8);
         solveAndPrint(queensProblem);
         /**
-        final Problem queensProblem2 = new QueensAC3(2);
+        final Problem queensProblem2 = new QueensAStar(2);
         solveAndPrint(queensProblem2);
         
-        final Problem queensProblem3 = new QueensAC3(3);
+        final Problem queensProblem3 = new QueensAStar(3);
         solveAndPrint(queensProblem3);
         
-        final Problem queensProblem4 = new QueensAC3(4);
+        final Problem queensProblem4 = new QueensAStar(4);
         solveAndPrint(queensProblem4);
         
-        final Problem queensProblem8 = new QueensAC3(18);
+        final Problem queensProblem8 = new QueensAStar(18);
         solveAndPrint(queensProblem8);
         */
     }
