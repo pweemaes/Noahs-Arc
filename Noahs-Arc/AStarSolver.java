@@ -16,10 +16,13 @@ public class AStarSolver implements Solver
 {
     private final List<Constraint> constraints;
     private final List<Variable> variables;
-    public BacktrackSolver(Problem problem)
+    private final Problem issue;
+    
+    public AStarSolver(SudokuAStar problem)
     {
         constraints = problem.getConstraints();
         variables = problem.getVariables();
+        issue = problem;
     }
     
     // returns true if a valid solution was found. if not returns false
@@ -34,6 +37,8 @@ public class AStarSolver implements Solver
             current.setValue(newval);
             if (constraintsSatisfied(constraintsWithAnyVals()))
             {
+                // REMOVE FROM DOMAIN
+                current.removeFromDomain(newval); 
                 if (runSolver())
                     return true;  
             }
@@ -50,14 +55,31 @@ public class AStarSolver implements Solver
     // returns first unassigned variable, null means all are assigned
     public Variable getUnassignedVar()
     {
+        boolean done = true;
+        Variable best = variables.get(0);
+        // check the score of each variable and get the lowest cost/score
         for (int i = 0; i < variables.size(); i++)
-        {
-            if (variables.get(i).hasValue())
+        {            
+            Variable curr = variables.get(i);
+            
+            if (curr.hasValue())
+            {
                 continue;
+            }
             else 
-                return variables.get(i);
+            {
+                if ((h(curr) + g(curr)) < (h(best) + g(best)))
+                {
+                    best = curr;
+                }
+                done = false;
+                continue;
+            }
         }
-        return null;
+        if (done)
+          return null;
+        else
+          return best;
     }
     
     public boolean constraintHasAnyVals(Constraint c)
@@ -103,5 +125,51 @@ public class AStarSolver implements Solver
    
     public void printAll()
     {
+    }
+    
+    // first cost function gets how many values are left in current domain
+    public int h(Variable n)
+    {
+        n.getDomain().size();
+    }
+    
+    // second cost function is based on open slots
+    public int g(Variable n)
+    {
+       int size = (issue.getSize() - 1) * 2 - ((issue.getSqrtSize() - 1) * (issue.getSqrtSize() - 1));
+       
+       int id = Integer.parseInt(n.getName());
+       int row_num = id / issue.getSize();
+       int col_num = id % issue.getSize();
+       int box_num = (col_num / issue.getSqrtSize()) + (row_num / issue.getSqrtSize()) * 3;
+       
+       List<int> buffer;
+       for (int i = 0; i < n.getRows()[row_num].length; i++)
+       {
+           int slot = n.getRows()[row_num][i];
+           if (!(slot.has_value()))
+           { 
+               buffer.add(Integer.parseInt(slot.getName()));
+           }
+       }
+       for (int i = 0; i < n.getCols()[col_num].length; i++)
+       {
+           int slot = n.getCols()[col_num][i];
+           if (!(slot.has_value()))
+           { 
+               buffer.add(Integer.parseInt(slot.getName()));
+           }
+       }
+       for (int i = 0; i < n.getBoxes()[box_num].length; i++)
+       {
+           int slot = n.getBoxes()[box_num][i];
+           if ((!(n.getRows()[row_num][i].has_value())) && (!(buffer.contains(Integer.parseInt(slot.getName())))))
+           {
+               buffer.add(Integer.parseInt(slot.getName()));
+           }
+       }
+       
+       int cost = size - buffer.size();
+       return cost;
     }
 }
