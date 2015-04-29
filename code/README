@@ -1,0 +1,12 @@
+/NOAHS ARC/
+
+/To compile
+1. cd to Noahs-Arc/code/
+2. run “make” or “make all”
+
+
+/To run
+1. run “java NoahsArc > outputfilename.txt” or “java NoahsArc”
+	(output is lots of text, piping highly recommended)
+
+
