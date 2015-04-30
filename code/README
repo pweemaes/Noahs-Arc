@@ -7,6 +7,6 @@
 
 /To run
 1. run “java NoahsArc > outputfilename.txt” or “java NoahsArc”
-	(output is lots of text, piping highly recommended)
+	(output is many lines of text, piping highly recommended)
 
 

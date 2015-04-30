@@ -11,13 +11,13 @@ public class NoahsArc
         
         printLine();
         
-        System.out.print("\n\n=========Solve a blank sudoku board using AC1 domain purging combined with backtracking:\n\n");
+        System.out.print("\n\nSolve a blank sudoku board using AC1 domain purging combined with backtracking:\n\n");
         
         SudokuAC1 sudokuBlankAC1 = new SudokuAC1();
         double sudokuBlankAC1Time = sudokuBlankAC1.solveAndPrint(sudokuBlankAC1);
         printLine();
         
-        System.out.print("\n\n=========Solve a blank sudoku board using AC3 domain purging combined with backtracking:\n\n");
+        System.out.print("\n\nSolve a blank sudoku board using AC3 domain purging combined with backtracking:\n\n");
         
         SudokuAC3 sudokuBlankAC3 = new SudokuAC3();
         double sudokuBlankAC3Time = sudokuBlankAC3.solveAndPrint(sudokuBlankAC3);
@@ -25,7 +25,7 @@ public class NoahsArc
         
         printLine();
         
-        System.out.print("\n\n=========Solve a blank sudoku board using AStar domain purging combined with backtracking:\n\n");
+        System.out.print("\n\nSolve a blank sudoku board using AStar variable selection combined with backtracking:\n\n");
         
         SudokuAStar sudokuBlankAStar = new SudokuAStar();
         double sudokuBlankAStarTime = sudokuBlankAStar.solveAndPrint(sudokuBlankAStar);

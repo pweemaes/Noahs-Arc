@@ -110,15 +110,6 @@ public class SudokuAStar implements Problem
             }
         }
         
-        for (int i = 0; i < boxes.length; i++)
-        {
-            for (int j = 0; j < boxes[i].length; j++)
-            {
-                System.out.print(Integer.toString(boxes[i][j].getID()) + " ");
-            }
-            System.out.print("\n");
-        }
-        
         for (int i = 0; i < SIZE; i++)
         {   
             for (int j = i + 1; j < SIZE; j++)
