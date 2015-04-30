@@ -16,10 +16,13 @@ public class AStarSolver implements Solver
 {
     private final List<Constraint> constraints;
     private final List<Variable> variables;
-    public AStarSolver(Problem problem)
+    private final SudokuAStar issue;
+    
+    public AStarSolver(SudokuAStar problem)
     {
         constraints = problem.getConstraints();
         variables = problem.getVariables();
+        issue = problem;
     }
     
     // returns true if a valid solution was found. if not returns false
@@ -30,14 +33,19 @@ public class AStarSolver implements Solver
             return true;
         for (int i = 0; i < current.getDomain().size(); i++)
         {
-            int newval = current.getDomain().get(i);
+            List<Integer> oldDomain = current.getDomain();
+            int newval = oldDomain.get(i);
             current.setValue(newval);
+            current.setDomain(i); 
             if (constraintsSatisfied(constraintsWithAnyVals()))
             {
+                // REMOVE FROM DOMAIN
+                
                 if (runSolver())
                     return true;  
             }
-            current.setValue(current.getPrevious());
+            current.setDomain(oldDomain);
+            current.setValue(current.getPrevious());            
         }
         return false;
     }
@@ -47,17 +55,31 @@ public class AStarSolver implements Solver
         return variables.get(varPos);
     }
     
-    // returns first unassigned variable, null means all are assigned
     public Variable getUnassignedVar()
     {
-        for (int i = 0; i < variables.size(); i++)
+        if (variables.size() == 0)
         {
-            if (variables.get(i).hasValue())
-                continue;
-            else 
-                return variables.get(i);
+            return null;
         }
-        return null;
+        boolean allset = true;
+        Variable best = variables.get(0);
+        // check the score of each variable and get the lowest cost/score
+        for (int i = 0; i < variables.size(); i++)
+        {            
+            Variable curr = variables.get(i);
+            if (! curr.hasValue())
+            {
+                if (h(curr) + g(curr) >= h(best) + g(best))
+                {
+                    best = curr;
+                }
+                allset = false;
+            }
+        }
+        if (allset || best.hasValue())
+          return null;
+        else 
+          return best;
     }
     
     public boolean constraintHasAnyVals(Constraint c)
@@ -95,6 +117,7 @@ public class AStarSolver implements Solver
         }
         return true;
     }
+   
     
     public int getVarLength()
     {
@@ -103,5 +126,51 @@ public class AStarSolver implements Solver
    
     public void printAll()
     {
+    }
+    
+    // first cost function gets how many values are left in current domain
+    public int h(Variable n)
+    {
+        int h =  n.getDomain().size();
+        return h;
+    }
+    
+    // second cost function is based on open slots
+    public int g(Variable n)
+    {       
+        int id = n.getID();
+        int row_num = id / issue.getSize();
+        int col_num = id % issue.getSize();
+        
+        int box_num = (col_num / issue.getSqrtSize()) * 3  + (row_num / issue.getSqrtSize());
+        
+        List<Integer> buffer = new ArrayList<Integer>();
+        for (int i = 0; i < issue.getRows()[row_num].length; i++)
+        {
+           Variable slot = issue.getRows()[row_num][i];
+           if (!(slot.hasValue()))
+           { 
+               buffer.add(slot.getID());
+           }
+        }
+        for (int i = 0; i < issue.getCols()[col_num].length; i++)
+        {
+           Variable slot = issue.getCols()[col_num][i];
+           if (!(slot.hasValue()))
+           { 
+               buffer.add(slot.getID());
+           }
+        }
+        
+        for (int i = 0; i < issue.getBoxes()[box_num].length; i++)
+        {
+           Variable slot = issue.getBoxes()[box_num][i];
+           if ((!(issue.getRows()[row_num][i].hasValue())) && (!(buffer.contains(slot.getID()))))
+           {
+               buffer.add(slot.getID());
+           }
+        }
+        int cost = 27 - buffer.size();
+        return cost;
     }
 }

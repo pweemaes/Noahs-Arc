@@ -199,22 +199,6 @@ public class NoahsArc
         
         printLine();
         
-        System.out.print("Solve the same boards using AStar:\n\n");
-        
-        QueensAStar queensAStar_4 = new QueensAStar();
-        double queensAStar_4BacktrackTime = queensAStar_4.solveAndPrint(queensAStar_4);
-        
-        printLine();
-        
-        QueensAStar queensAStar_8 = new QueensAStar(8);
-        double queensAStar_8BacktrackTime = queensAStar_8.solveAndPrint(queensAStar_8);
-        
-        printLine();
-        
-        QueensAStar queensAStar_15 = new QueensAStar(15);
-        double queensAStar_15BacktrackTime = queensAStar_15.solveAndPrint(queensAStar_15);
-        
-        printLine();
         
         System.out.print("\nRunning Times:\n\n");
         System.out.print("Blank Sudoku Backtrack: " + sudokuBlankBacktrackTime);
@@ -232,18 +216,12 @@ public class NoahsArc
         System.out.print("\n\n4x4 Queens Backtrack:   " + queens4BacktrackTime);
         System.out.print("\n4x4 Queens AC1:         " + queensAC1_4BacktrackTime);
         System.out.print("\n4x4 Queens AC3:         " + queensAC3_4BacktrackTime);
-        System.out.print("\n4x4 Queens AStar:       " + queensAStar_4BacktrackTime);
         System.out.print("\n\n8x8 Queens Backtrack:   " + queens8BacktrackTime);
         System.out.print("\n8x8 Queens AC1:         " + queensAC1_8BacktrackTime);
         System.out.print("\n8x8 Queens AC3:         " + queensAC3_8BacktrackTime);
-        System.out.print("\n8x8 Queens AStar:       " + queensAStar_8BacktrackTime);
         System.out.print("\n\n15x15 Queens Backtrack: " + queens15BacktrackTime);
         System.out.print("\n15x15 Queens AC1:       " + queensAC1_15BacktrackTime);
-        System.out.print("\n15x15 Queens AC3:       " + queensAC3_15BacktrackTime);
-        System.out.print("\n15x15 Queens AStar:     " + queensAStar_15BacktrackTime);
-        
-        
-        
+        System.out.print("\n15x15 Queens AC3:       " + queensAC3_15BacktrackTime);        
     }
     
     private static void printLine()

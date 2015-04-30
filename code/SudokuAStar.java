@@ -1,6 +1,6 @@
 import java.util.*;
 /**
- * SudokuAStar
+ * SudokuAC3
  */
 public class SudokuAStar implements Problem
 {
@@ -8,6 +8,9 @@ public class SudokuAStar implements Problem
     private final static int SQRTSIZE = 3;
     private final List<Constraint> constraints;
     private final List<Variable> variables;
+    private Variable[][] cols;
+    private Variable[][] rows;
+    private Variable[][] boxes;
     static double start = 0.0;
     static double stop = 0.0;
     
@@ -72,7 +75,7 @@ public class SudokuAStar implements Problem
     
     private void makeBinaryConstraints(int n)
     {
-        Variable[][] rows = new Variable[SIZE][SIZE];
+        rows = new Variable[SIZE][SIZE];
         for (int i = 0; i < SIZE; i++)
         {
             for (int j = 0; j < SIZE; j++)
@@ -81,7 +84,7 @@ public class SudokuAStar implements Problem
             }
         }
         
-        Variable[][] cols = new Variable[SIZE][SIZE];
+        cols = new Variable[SIZE][SIZE];
         for (int i = 0; i < SIZE; i++)
         {
             for (int j = 0; j < SIZE; j++)
@@ -90,7 +93,7 @@ public class SudokuAStar implements Problem
             }
         }
         
-        Variable[][] boxes = new Variable[SIZE][SIZE];
+        boxes = new Variable[SIZE][SIZE];
         for (int boxrow = 0; boxrow < SQRTSIZE; boxrow++)
         {
             for (int boxcol = 0; boxcol < SQRTSIZE; boxcol++)
@@ -105,6 +108,15 @@ public class SudokuAStar implements Problem
                     }
                 }
             }
+        }
+        
+        for (int i = 0; i < boxes.length; i++)
+        {
+            for (int j = 0; j < boxes[i].length; j++)
+            {
+                System.out.print(Integer.toString(boxes[i][j].getID()) + " ");
+            }
+            System.out.print("\n");
         }
         
         for (int i = 0; i < SIZE; i++)
@@ -166,7 +178,32 @@ public class SudokuAStar implements Problem
         stop = System.nanoTime();
     }
     
-    public static double solveAndPrint(Problem sudokuProblem)
+    public int getSize()
+    {
+        return SIZE;
+    }
+    
+    public int getSqrtSize()
+    {
+        return SQRTSIZE;
+    }
+    
+    public Variable[][] getRows()
+    {
+        return rows;
+    }
+    
+    public Variable[][] getCols()
+    {
+        return cols;
+    }
+    
+    public Variable[][] getBoxes()
+    {
+        return boxes;
+    }
+    
+    public static double solveAndPrint(SudokuAStar sudokuProblem)
     {
         final Solver solver = new AStarSolver(sudokuProblem)
         {
@@ -208,21 +245,21 @@ public class SudokuAStar implements Problem
     
     public static void main(String[] args)
     {              
-        /**
-         *
-        final Problem sudokuProblem = new SudokuAStar();
+        
+        final SudokuAStar sudokuProblem = new SudokuAStar();
         solveAndPrint(sudokuProblem);
 
         System.out.print("\n========NEW BOARD========\n\n");
-        */
         
+        /**
         int[] board2 = new int[81];
         board2[0] = 4;
         board2[1] = 5;
         board2[2] = 8;
         
-        final Problem sudokuProblem2 = new SudokuAStar(board2);
+        final SudokuAStar sudokuProblem2 = new SudokuAStar(board2);
         solveAndPrint(sudokuProblem2);
+        */
         
     }
 }
