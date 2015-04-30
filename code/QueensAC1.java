@@ -132,25 +132,5 @@ public class QueensAC1 implements Problem
         System.out.print("=====NO SOLUTION======\n");
         return 0.0;
     }
-    
-    
-    public static void main(String[] args)
-    {
-        final Problem queensProblem = new QueensAC1(8);
-        solveAndPrint(queensProblem);
-        /**
-        final Problem queensProblem2 = new QueensAC1(2);
-        solveAndPrint(queensProblem2);
-        
-        final Problem queensProblem3 = new QueensAC1(3);
-        solveAndPrint(queensProblem3);
-        
-        final Problem queensProblem4 = new QueensAC1(4);
-        solveAndPrint(queensProblem4);
-        
-        final Problem queensProblem8 = new QueensAC1(18);
-        solveAndPrint(queensProblem8);
-        */
-    }
 }
 

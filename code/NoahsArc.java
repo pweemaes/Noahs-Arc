@@ -4,38 +4,30 @@ public class NoahsArc
     {
         System.out.print("CS51 Final Project\n2015\nAndrew Fai\nTomoya Hasegawa\nRandall Raymond\nPieter Weemaes\n");
         System.out.print("\n\n\n\n");
-        System.out.print("Solve blank sudoku board using simple backtracking:\n\n");
         
+        System.out.print("Solve blank sudoku board using simple backtracking:\n\n");        
         Sudoku sudokuBlank = new Sudoku();
-        double sudokuBlankBacktrackTime = sudokuBlank.solveAndPrint(sudokuBlank);
-        
+        double sudokuBlankBacktrackTime = sudokuBlank.solveAndPrint(sudokuBlank);        
         printLine();
         
-        System.out.print("\n\nSolve a blank sudoku board using AC1 domain purging combined with backtracking:\n\n");
-        
+        System.out.print("\n\nSolve a blank sudoku board using AC1 domain purging combined with backtracking:\n\n");        
         SudokuAC1 sudokuBlankAC1 = new SudokuAC1();
         double sudokuBlankAC1Time = sudokuBlankAC1.solveAndPrint(sudokuBlankAC1);
         printLine();
         
-        System.out.print("\n\nSolve a blank sudoku board using AC3 domain purging combined with backtracking:\n\n");
-        
+        System.out.print("\n\nSolve a blank sudoku board using AC3 domain purging combined with backtracking:\n\n");        
         SudokuAC3 sudokuBlankAC3 = new SudokuAC3();
-        double sudokuBlankAC3Time = sudokuBlankAC3.solveAndPrint(sudokuBlankAC3);
-        
-        
+        double sudokuBlankAC3Time = sudokuBlankAC3.solveAndPrint(sudokuBlankAC3);        
         printLine();
         
-        System.out.print("\n\nSolve a blank sudoku board using AStar variable selection combined with backtracking:\n\n");
-        
+        System.out.print("\n\nSolve a blank sudoku board using AStar variable selection combined with backtracking:\n\n");        
         SudokuAStar sudokuBlankAStar = new SudokuAStar();
         double sudokuBlankAStarTime = sudokuBlankAStar.solveAndPrint(sudokuBlankAStar);
-        
-        
         printLine();
+        
         // solve a sudoku with starting constraints.
         System.out.print("Solve easy sudoku board using simple backtracking:\n\n");
-        
-        
+                
         int[] easyBoard = new int[81];
         easyBoard[5] = 8;
         easyBoard[8] = 4;
@@ -67,33 +59,27 @@ public class NoahsArc
         easyBoard[75] = 3;
 
         Sudoku sudokuEasy = new Sudoku(easyBoard);
-        double sudokuEasyBacktrackTime = sudokuBlank.solveAndPrint(sudokuEasy);
+        double sudokuEasyBacktrackTime = sudokuEasy.solveAndPrint(sudokuEasy);
         printLine();
         
-        System.out.print("Solve easy sudoku board using AC1:\n\n");
-        
+        System.out.print("Solve easy sudoku board using AC1:\n\n");        
         SudokuAC1 sudokuEasyAC1 = new SudokuAC1(easyBoard);
-        double sudokuEasyAC1Time = sudokuEasyAC1.solveAndPrint(sudokuEasyAC1);
-        
+        double sudokuEasyAC1Time = sudokuEasyAC1.solveAndPrint(sudokuEasyAC1);        
         printLine();
         
-        System.out.print("Solve easy sudoku board using AC3:\n\n");
-        
+        System.out.print("Solve easy sudoku board using AC3:\n\n");        
         SudokuAC3 sudokuEasyAC3 = new SudokuAC3(easyBoard);
-        double sudokuEasyAC3Time = sudokuEasyAC3.solveAndPrint(sudokuEasyAC3);
-        
+        double sudokuEasyAC3Time = sudokuEasyAC3.solveAndPrint(sudokuEasyAC3);        
         printLine();
         
-        System.out.print("Solve easy sudoku board using AStar:\n\n");
-        
+        System.out.print("Solve easy sudoku board using AStar:\n\n");        
         SudokuAStar sudokuEasyAStar = new SudokuAStar(easyBoard);
-        double sudokuEasyAStarTime = sudokuEasyAStar.solveAndPrint(sudokuEasyAStar);
-        
+        double sudokuEasyAStarTime = sudokuEasyAStar.solveAndPrint(sudokuEasyAStar);        
         printLine();
+        
         
         System.out.print("Solve hard sudoku board using simple backtracking:\n\n");
-        
-        
+                
         int[] hardBoard = new int[81];
         hardBoard[0] = 3;
         hardBoard[8] = 8;
@@ -125,78 +111,66 @@ public class NoahsArc
         hardBoard[80] = 4;
 
         Sudoku sudokuHard = new Sudoku(hardBoard);
-        double sudokuHardBacktrackTime = sudokuBlank.solveAndPrint(sudokuHard);
+        double sudokuHardBacktrackTime = sudokuEasy.solveAndPrint(sudokuHard);
         printLine();
         
-        System.out.print("Solve hard sudoku board using AC1:\n\n");
-        
+        System.out.print("Solve hard sudoku board using AC1:\n\n");        
         SudokuAC1 sudokuHardAC1 = new SudokuAC1(hardBoard);
-        double sudokuHardAC1Time = sudokuEasyAC1.solveAndPrint(sudokuHardAC1);
-        
+        double sudokuHardAC1Time = sudokuHardAC1.solveAndPrint(sudokuHardAC1);        
         printLine();
         
-        System.out.print("Solve hard sudoku board using AC3:\n\n");
-        
+        System.out.print("Solve hard sudoku board using AC3:\n\n");        
         SudokuAC3 sudokuHardAC3 = new SudokuAC3(hardBoard);
-        double sudokuHardAC3Time = sudokuEasyAC3.solveAndPrint(sudokuHardAC3);
-        
+        double sudokuHardAC3Time = sudokuHardAC3.solveAndPrint(sudokuHardAC3);        
         printLine();
         
-        System.out.print("Solve hard sudoku board using AStar:\n\n");
-        
+        System.out.print("Solve hard sudoku board using AStar:\n\n");        
         SudokuAStar sudokuHardAStar = new SudokuAStar(hardBoard);
-        double sudokuHardAStarTime = sudokuEasyAStar.solveAndPrint(sudokuHardAStar);
-        
+        double sudokuHardAStarTime = sudokuHardAStar.solveAndPrint(sudokuHardAStar);        
         printLine();
         printLine();
         
-        System.out.print("Solve the n-queens problem of placing n number of queens\non a board of n x n size using backtracking:\n\n");
         
+        
+        System.out.print("Solve the n-queens problem of placing n number of queens\non a board of n x n size using backtracking:\n\n");        
         Queens queens4 = new Queens();
-        double queens4BacktrackTime = queens4.solveAndPrint(queens4);
-        
+        double queens4BacktrackTime = queens4.solveAndPrint(queens4);        
         printLine();
         
         Queens queens8 = new Queens(8);
-        double queens8BacktrackTime = queens8.solveAndPrint(queens8);
-        
+        double queens8BacktrackTime = queens8.solveAndPrint(queens8);       
         printLine();
         
         Queens queens15 = new Queens(15);
-        double queens15BacktrackTime = queens15.solveAndPrint(queens15);
-        
+        double queens15BacktrackTime = queens15.solveAndPrint(queens15);        
         printLine();
         
-        System.out.print("Solve the same boards using AC1:\n\n");
         
+        System.out.print("Solve the same boards using AC1:\n\n");        
         QueensAC1 queensAC1_4 = new QueensAC1();
-        double queensAC1_4BacktrackTime = queensAC1_4.solveAndPrint(queensAC1_4);
-        
+        double queensAC1_4BacktrackTime = queensAC1_4.solveAndPrint(queensAC1_4);        
         printLine();
         
         QueensAC1 queensAC1_8 = new QueensAC1(8);
-        double queensAC1_8BacktrackTime = queensAC1_8.solveAndPrint(queensAC1_8);
-        
+        double queensAC1_8BacktrackTime = queensAC1_8.solveAndPrint(queensAC1_8);        
         printLine();
         
         QueensAC1 queensAC1_15 = new QueensAC1(15);
         double queensAC1_15BacktrackTime = queensAC1_15.solveAndPrint(queensAC1_15);
+        printLine();
         
-        System.out.print("Solve the same boards using AC3:\n\n");
         
+        System.out.print("Solve the same boards using AC3:\n\n");        
         QueensAC3 queensAC3_4 = new QueensAC3();
-        double queensAC3_4BacktrackTime = queensAC3_4.solveAndPrint(queensAC3_4);
-        
+        double queensAC3_4BacktrackTime = queensAC3_4.solveAndPrint(queensAC3_4);        
         printLine();
         
         QueensAC3 queensAC3_8 = new QueensAC3(8);
-        double queensAC3_8BacktrackTime = queensAC3_8.solveAndPrint(queensAC3_8);
-        
+        double queensAC3_8BacktrackTime = queensAC3_8.solveAndPrint(queensAC3_8);        
         printLine();
         
         QueensAC3 queensAC3_15 = new QueensAC3(15);
-        double queensAC3_15BacktrackTime = queensAC3_15.solveAndPrint(queensAC3_15);
-        
+        double queensAC3_15BacktrackTime = queensAC3_15.solveAndPrint(queensAC3_15);        
         printLine();
         
         

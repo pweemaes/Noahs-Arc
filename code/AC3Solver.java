@@ -18,8 +18,7 @@ public class AC3Solver implements Solver
         while (arcs.size() > 0)
         {
             Constraint current = arcs.iterator().next();
-            arcs.remove(current);
-            
+            arcs.remove(current);            
             if (revise(current))
             {
                 int domainX = current.getVariable(0).getDomain().size();
@@ -30,7 +29,6 @@ public class AC3Solver implements Solver
                     arcs.addAll(getAffectedConstraints(arcs, current));
                 }
             }
-            
         }
         return true;
     }
@@ -38,8 +36,7 @@ public class AC3Solver implements Solver
     private Collection<Constraint> 
         getAffectedConstraints(Set<Constraint> arcs, Constraint c)
     {
-        Variable first = c.getVariable(0);
-        
+        Variable first = c.getVariable(0);        
         Collection<Constraint> toReturn = new HashSet<Constraint>();
         Iterator<Constraint> iterator = arcs.iterator();
         while (iterator.hasNext())
@@ -84,8 +81,6 @@ public class AC3Solver implements Solver
             }
             var0.setValue(initVal0);
         }
-        //var0.printDomain();
-        //var1.printDomain();
         return deleted;
     }
     
@@ -93,6 +88,8 @@ public class AC3Solver implements Solver
     // returns true if a valid solution was found. if not returns false
     public boolean runSolver()
     {
+        // This first call to AC3 might prove useless (blank boards) and that wastes time.
+        // however it also helps greatly when boards already have values
         AC3();   
         return solver();
     }
@@ -101,7 +98,9 @@ public class AC3Solver implements Solver
     {
         Variable current = getUnassignedVar();
         if (current == null)
+        {
             return true;
+        }
         for (int i = 0; i < current.getDomain().size(); i++)
         {
             int newval = current.getDomain().get(i);
@@ -120,7 +119,6 @@ public class AC3Solver implements Solver
                     return true;  
                 }
             }
-            
             current.setValue(oldval);
             current.setDomain(originalDomain);
         }

@@ -17,7 +17,9 @@ public class BacktrackSolver implements Solver
     {
         Variable current = getUnassignedVar();
         if (current == null)
+        {
             return true;
+        }
         for (int i = 0; i < current.getDomain().size(); i++)
         {
             int newval = current.getDomain().get(i);
@@ -25,7 +27,9 @@ public class BacktrackSolver implements Solver
             if (constraintsSatisfied(constraintsWithAnyVals()))
             {
                 if (runSolver())
+                {
                     return true;  
+                }
             }
             current.setValue(current.getPrevious());
         }
@@ -42,10 +46,10 @@ public class BacktrackSolver implements Solver
     {
         for (int i = 0; i < variables.size(); i++)
         {
-            if (variables.get(i).hasValue())
-                continue;
-            else 
+            if (! variables.get(i).hasValue())
+            {
                 return variables.get(i);
+            }
         }
         return null;
     }
@@ -56,9 +60,9 @@ public class BacktrackSolver implements Solver
         for (int i = 0; i < vars.length; i++)
         {
             if (vars[i].hasValue())
+            {
                 return true;
-            else
-                continue;
+            }
         }
         return false;
     }
@@ -69,7 +73,9 @@ public class BacktrackSolver implements Solver
         for (int i = 0; i < constraints.size(); i++)
         {
             if (constraintHasAnyVals(constraints.get(i)))
+            {
                 applicable.add(constraints.get(i));
+            }
         }
         return applicable;
     }
@@ -78,10 +84,10 @@ public class BacktrackSolver implements Solver
     {
         for (int i = 0; i < cList.size(); i++)
         {
-            if (cList.get(i).check())
-                continue;
-            else 
+            if (! cList.get(i).check())
+            {  
                 return false;
+            }
         }
         return true;
     }
@@ -91,7 +97,5 @@ public class BacktrackSolver implements Solver
         return variables.size();
     }
    
-    public void printAll()
-    {
-    }
+    public void printAll(){}
 }

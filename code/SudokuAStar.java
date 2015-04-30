@@ -233,25 +233,5 @@ public class SudokuAStar implements Problem
         System.out.print("=====NO SOLUTION======\n");
         return 0.0;        
     }
-    
-    public static void main(String[] args)
-    {              
-        
-        final SudokuAStar sudokuProblem = new SudokuAStar();
-        solveAndPrint(sudokuProblem);
-
-        System.out.print("\n========NEW BOARD========\n\n");
-        
-        /**
-        int[] board2 = new int[81];
-        board2[0] = 4;
-        board2[1] = 5;
-        board2[2] = 8;
-        
-        final SudokuAStar sudokuProblem2 = new SudokuAStar(board2);
-        solveAndPrint(sudokuProblem2);
-        */
-        
-    }
 }
 
