@@ -47,14 +47,12 @@ public class Variable
         List<Integer> newDomain = new ArrayList<Integer>();
         newDomain.add(n);
         domain = newDomain;
-    }
-    
+    }    
     
     public void removeFromDomain(int n)
     {
         domain.remove(n);
-    }
-    
+    }    
     
     public int getID() 
     {
@@ -69,12 +67,5 @@ public class Variable
     public int getPrevious()
     {
         return previousVal;
-    }
-
-    public void printDomain()
-    {
-        System.out.print(Integer.toString(getID()) + ": ");
-        System.out.print(Arrays.toString(domain.toArray()) + "\n");
-    }
-    
+    }   
 }

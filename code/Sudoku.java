@@ -15,7 +15,6 @@ public class Sudoku implements Problem
     {
         constraints = new ArrayList<Constraint>();
         variables = new ArrayList<Variable>();
-       
         
         // makes 0-80 variables with domain 1-SIZE
         for (int i = 0; i < (SIZE * SIZE); i++)
@@ -206,21 +205,6 @@ public class Sudoku implements Problem
         }
         System.out.print("=====NO SOLUTION======\n");
         return 0.0;        
-    }
-    
-    public static void main(String[] args)
-    {              
-        final Problem sudokuProblem = new Sudoku();
-        solveAndPrint(sudokuProblem);
-        
-        System.out.print("\n========NEW BOARD========\n\n");
-        int[] board2 = new int[81];
-        board2[0] = 4;
-        board2[1] = 5;
-        board2[2] = 8;
-        
-        final Problem sudokuProblem2 = new Sudoku(board2);
-        solveAndPrint(sudokuProblem2);        
     }
 }
 

@@ -1,21 +1,23 @@
 import java.util.*;
 /**
- * Arc Consistency (3) algorithm implemented here
+ * Arc Consistency (1) algorithm implemented here
  */
 public class AC1Solver implements Solver
 {
     private final List<Constraint> constraints;
     private final List<Variable> variables;
+
     public AC1Solver(Problem problem)
     {
         constraints = problem.getConstraints();
         variables = problem.getVariables();
     }
-    
+
     private boolean AC1() 
     {
         Set<Constraint> arcs = new HashSet<>(constraints);    
         boolean changed = true;
+
         while (arcs.size() > 0 && changed)
         {
             changed = false;
@@ -25,8 +27,11 @@ public class AC1Solver implements Solver
             if (revise(current))
             {
                 int domainX = current.getVariable(0).getDomain().size();
+
                 if (domainX == 0)
+                {
                     return false;
+                }
                 else
                 {
                     changed = true;
@@ -40,13 +45,14 @@ public class AC1Solver implements Solver
         getAffectedConstraints(Set<Constraint> arcs, Constraint c)
     {
         Variable first = c.getVariable(0);
-        
         Collection<Constraint> toReturn = new HashSet<Constraint>();
         Iterator<Constraint> iterator = arcs.iterator();
+
         while (iterator.hasNext())
         {
             Constraint toCheck = iterator.next();
             Variable secondCheck = toCheck.getVariable(1);
+
             if (first == secondCheck)
             {
                 toReturn.add(toCheck);
@@ -62,21 +68,25 @@ public class AC1Solver implements Solver
         boolean deleted = false;
         int initVal0 = var0.getValue();
         int initVal1 = var1.getValue();
+
         for (int i = 0; i < var0.getDomain().size(); i++)
         {
             int newVal0 = var0.getDomain().get(i);
             var0.setValue(newVal0); 
             boolean satisfied = false;
+
             for (int j = 0; j < var1.getDomain().size(); j++)
             {
                 int newVal1 = var1.getDomain().get(j);
                 var1.setValue(newVal1);
+
                 if (current.check())
                 {
                     satisfied = true;
                 }  
                 var1.setValue(initVal1);
             }
+
             if (! satisfied)
             {
                 var0.removeFromDomain(i);
@@ -85,12 +95,9 @@ public class AC1Solver implements Solver
             }
             var0.setValue(initVal0);
         }
-        //var0.printDomain();
-        //var1.printDomain();
         return deleted;
     }
-    
-    
+
     // returns true if a valid solution was found. if not returns false
     public boolean runSolver()
     {
@@ -101,8 +108,12 @@ public class AC1Solver implements Solver
     private boolean solver()
     {
         Variable current = getUnassignedVar();
+
         if (current == null)
+        {
             return true;
+        }
+
         for (int i = 0; i < current.getDomain().size(); i++)
         {
             int newval = current.getDomain().get(i);
@@ -112,7 +123,7 @@ public class AC1Solver implements Solver
             List<Integer> newDomain = new ArrayList<Integer>();
             newDomain.add(newval);
             current.setDomain(newDomain);
-            
+
             if (constraintsSatisfied(constraintsWithAnyVals()))
             {
                 if (solver())
@@ -121,40 +132,49 @@ public class AC1Solver implements Solver
                     return true;  
                 }
             }
-            
+
             current.setValue(oldval);
             current.setDomain(originalDomain);
         }
         return false;
     }
-    
+
     public Variable getVariable(int varPos)
     {
         return variables.get(varPos);
     }
-    
+
     // returns first unassigned variable, null means all are assigned
     public Variable getUnassignedVar()
     {
         for (int i = 0; i < variables.size(); i++)
         {
             if (variables.get(i).hasValue())
+            {
                 continue;
-            else 
+            }
+            else
+            {
                 return variables.get(i);
+            }
         }
         return null;
     }
-    
+
     public boolean constraintHasAnyVals(Constraint c)
     {
         Variable[] vars = c.getVariables();
+
         for (int i = 0; i < vars.length; i++)
         {
             if (vars[i].hasValue())
+            {
                 return true;
+            }
             else
+            {
                 continue;
+            }
         }
         return false;
     }
@@ -162,10 +182,13 @@ public class AC1Solver implements Solver
     public List<Constraint> constraintsWithAnyVals()
     {
         List<Constraint> applicable = new ArrayList<Constraint>();
+
         for (int i = 0; i < constraints.size(); i++)
         {
             if (constraintHasAnyVals(constraints.get(i)))
+            {
                 applicable.add(constraints.get(i));
+            }
         }
         return applicable;
     }
@@ -175,9 +198,13 @@ public class AC1Solver implements Solver
         for (int i = 0; i < cList.size(); i++)
         {
             if (cList.get(i).check())
+            {
                 continue;
-            else 
+            }
+            else
+            {
                 return false;
+            }
         }
         return true;
     }
@@ -187,7 +214,5 @@ public class AC1Solver implements Solver
         return variables.size();
     }
    
-    public void printAll()
-    {
-    }
+    public void printAll() {}
 }

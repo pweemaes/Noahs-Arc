@@ -29,8 +29,6 @@ public class Queens implements Problem
     @Override
     public void generate() 
     {
-       
-        
         // makes SIZE variables with domain 0 to SIZE-1
         for (int i = 0; i < SIZE; i++)
         {
@@ -58,8 +56,10 @@ public class Queens implements Problem
                         Variable var0 = getVariable(0);
                         Variable var1 = getVariable(1);
                         if (var0.hasValue() && var1.hasValue())
+                        {
                             return (var0.getValue() != var1.getValue()) &&
                                 (Math.abs(var1.getValue() - var0.getValue()) != difference); 
+                        }
                         return true;
                     }
                 });
@@ -133,18 +133,6 @@ public class Queens implements Problem
         }
         System.out.print("=====NO SOLUTION======\n");
         return 0.0;
-    }
-    
-    
-    public static void main(String[] args)
-    {      
-        final Problem queensProblem4 = new Queens();
-        solveAndPrint(queensProblem4);
-        /**
-        System.out.println("======NEW BOARD=======");
-        final Problem queensProblem8 = new Queens(8);
-        solveAndPrint(queensProblem8);
-        */
     }
 }
 

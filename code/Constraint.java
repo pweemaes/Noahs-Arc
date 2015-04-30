@@ -21,18 +21,19 @@ public class Constraint
     }
 
     public boolean check() 
-    { return false;
+    {   return false;
     }
     
     public Variable[] getVariables()
-    { return new Variable[]{first, second};
+    {   return new Variable[]{first, second};
     }
-    
     
     public Variable getVariable(int variablePosition)
     {   
         if (variablePosition == 1)
+        {
             return second;
+        }
         return first;
     }
     

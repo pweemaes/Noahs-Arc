@@ -56,8 +56,10 @@ public class QueensAC3 implements Problem
                         Variable var0 = getVariable(0);
                         Variable var1 = getVariable(1);
                         if (var0.hasValue() && var1.hasValue())
+                        {
                             return (var0.getValue() != var1.getValue()) &&
                                 (Math.abs(var1.getValue() - var0.getValue()) != difference); 
+                        }
                         return true;
                     }
                 });
@@ -131,26 +133,6 @@ public class QueensAC3 implements Problem
         }       
         System.out.print("=====NO SOLUTION======\n");
         return 0.0;
-    }
-    
-    
-    public static void main(String[] args)
-    {
-        final Problem queensProblem = new QueensAC3(8);
-        solveAndPrint(queensProblem);
-        /**
-        final Problem queensProblem2 = new QueensAC3(2);
-        solveAndPrint(queensProblem2);
-        
-        final Problem queensProblem3 = new QueensAC3(3);
-        solveAndPrint(queensProblem3);
-        
-        final Problem queensProblem4 = new QueensAC3(4);
-        solveAndPrint(queensProblem4);
-        
-        final Problem queensProblem8 = new QueensAC3(18);
-        solveAndPrint(queensProblem8);
-        */
     }
 }
 

@@ -205,25 +205,5 @@ public class SudokuAC1 implements Problem
         System.out.print("=====NO SOLUTION======\n");
         return 0.0;        
     }
-    
-    public static void main(String[] args)
-    {              
-        /**
-         *
-        final Problem sudokuProblem = new SudokuAC1();
-        solveAndPrint(sudokuProblem);
-
-        System.out.print("\n========NEW BOARD========\n\n");
-        */
-        
-        int[] board2 = new int[81];
-        board2[0] = 4;
-        board2[1] = 5;
-        board2[2] = 8;
-        
-        final Problem sudokuProblem2 = new Sudoku(board2);
-        solveAndPrint(sudokuProblem2);
-        
-    }
 }
 
