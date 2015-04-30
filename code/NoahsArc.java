@@ -59,7 +59,7 @@ public class NoahsArc
         easyBoard[75] = 3;
 
         Sudoku sudokuEasy = new Sudoku(easyBoard);
-        double sudokuEasyBacktrackTime = sudokuBlank.solveAndPrint(sudokuEasy);
+        double sudokuEasyBacktrackTime = sudokuEasy.solveAndPrint(sudokuEasy);
         printLine();
         
         System.out.print("Solve easy sudoku board using AC1:\n\n");        
@@ -111,22 +111,22 @@ public class NoahsArc
         hardBoard[80] = 4;
 
         Sudoku sudokuHard = new Sudoku(hardBoard);
-        double sudokuHardBacktrackTime = sudokuBlank.solveAndPrint(sudokuHard);
+        double sudokuHardBacktrackTime = sudokuEasy.solveAndPrint(sudokuHard);
         printLine();
         
         System.out.print("Solve hard sudoku board using AC1:\n\n");        
         SudokuAC1 sudokuHardAC1 = new SudokuAC1(hardBoard);
-        double sudokuHardAC1Time = sudokuEasyAC1.solveAndPrint(sudokuHardAC1);        
+        double sudokuHardAC1Time = sudokuHardAC1.solveAndPrint(sudokuHardAC1);        
         printLine();
         
         System.out.print("Solve hard sudoku board using AC3:\n\n");        
         SudokuAC3 sudokuHardAC3 = new SudokuAC3(hardBoard);
-        double sudokuHardAC3Time = sudokuEasyAC3.solveAndPrint(sudokuHardAC3);        
+        double sudokuHardAC3Time = sudokuHardAC3.solveAndPrint(sudokuHardAC3);        
         printLine();
         
         System.out.print("Solve hard sudoku board using AStar:\n\n");        
         SudokuAStar sudokuHardAStar = new SudokuAStar(hardBoard);
-        double sudokuHardAStarTime = sudokuEasyAStar.solveAndPrint(sudokuHardAStar);        
+        double sudokuHardAStarTime = sudokuHardAStar.solveAndPrint(sudokuHardAStar);        
         printLine();
         printLine();
         
