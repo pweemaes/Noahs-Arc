@@ -5,8 +5,15 @@
 2. run “make” or “make all”
 
 
-/To run
+/To run timing program
+	(outputs a list of times for solving with different algorithms)
 1. run “java NoahsArc > outputfilename.txt” or “java NoahsArc”
 	(output is many lines of text, piping highly recommended)
 
 
+/To run SudokuSolver
+	input a txt file with a board and solve
+
+1. run “java SudokuSolver”
+	some sample files included are ‘puzzle1.txt’ 
+	‘puzzle2.txt’ ‘no_solution.txt’ and ‘multiple_solutions.txt’

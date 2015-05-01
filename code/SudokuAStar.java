@@ -50,7 +50,7 @@ public class SudokuAStar implements Problem
             variables.add(new Variable(domain, i));
         }
         
-        for (int i = 0; i < board.length; i++)
+        for (int i = 0, length = board.length; i < length; i++)
         {
             if (board[i] != 0)
             {
@@ -114,37 +114,9 @@ public class SudokuAStar implements Problem
         {   
             for (int j = i + 1; j < SIZE; j++)
             {
-                constraints.add(new Constraint(rows[n][i], rows[n][j])
-                {
-                    @Override
-                    public boolean check()
-                    {
-                        // we can use this to check if all values in the constraint are different
-                        return (! getVariable(0).hasValue() || ! getVariable(1).hasValue()) ||
-                        (getVariable(0).getValue() != getVariable(1).getValue());
-                    }
-                });
-                constraints.add(new Constraint(cols[n][i], cols[n][j])
-                {
-                    @Override
-                    public boolean check()
-                    {
-                        // we can use this to check if all values in the constraint are different
-                        return (! getVariable(0).hasValue() || ! getVariable(1).hasValue()) ||
-                        (getVariable(0).getValue() != getVariable(1).getValue());
-                    }
-                });
-                
-                constraints.add(new Constraint(boxes[n][i], boxes[n][j])
-                {
-                    @Override
-                    public boolean check()
-                    {
-                        // we can use this to check if all values in the constraint are different
-                        return (! getVariable(0).hasValue() || ! getVariable(1).hasValue()) ||
-                        (getVariable(0).getValue() != getVariable(1).getValue());
-                    }
-                });
+                constraints.add(new SudokuConstraint(rows[n][i], rows[n][j]));
+                constraints.add(new SudokuConstraint(cols[n][i], cols[n][j]));              
+                constraints.add(new SudokuConstraint(boxes[n][i], boxes[n][j]));
             }
         }
         

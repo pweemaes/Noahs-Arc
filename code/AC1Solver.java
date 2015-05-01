@@ -147,7 +147,7 @@ public class AC1Solver implements Solver
     // returns first unassigned variable, null means all are assigned
     public Variable getUnassignedVar()
     {
-        for (int i = 0; i < variables.size(); i++)
+        for (int i = 0, size = variables.size(); i < size; i++)
         {
             if (variables.get(i).hasValue())
             {
@@ -165,7 +165,7 @@ public class AC1Solver implements Solver
     {
         Variable[] vars = c.getVariables();
 
-        for (int i = 0; i < vars.length; i++)
+        for (int i = 0, length = vars.length; i < length; i++)
         {
             if (vars[i].hasValue())
             {
@@ -183,7 +183,7 @@ public class AC1Solver implements Solver
     {
         List<Constraint> applicable = new ArrayList<Constraint>();
 
-        for (int i = 0; i < constraints.size(); i++)
+        for (int i = 0, size = constraints.size(); i < size; i++)
         {
             if (constraintHasAnyVals(constraints.get(i)))
             {
@@ -195,7 +195,7 @@ public class AC1Solver implements Solver
     
     public boolean constraintsSatisfied(List<Constraint> cList)
     {
-        for (int i = 0; i < cList.size(); i++)
+        for (int i = 0, size = cList.size(); i < size; i++)
         {
             if (cList.get(i).check())
             {

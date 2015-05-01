@@ -133,25 +133,34 @@ public class AC3Solver implements Solver
     // returns first unassigned variable, null means all are assigned
     public Variable getUnassignedVar()
     {
-        for (int i = 0; i < variables.size(); i++)
+        for (int i = 0, size = variables.size(); i < size; i++)
         {
             if (variables.get(i).hasValue())
+            {
                 continue;
-            else 
+            }
+            else
+            {
                 return variables.get(i);
+            }
         }
         return null;
     }
-    
+
     public boolean constraintHasAnyVals(Constraint c)
     {
         Variable[] vars = c.getVariables();
-        for (int i = 0; i < vars.length; i++)
+
+        for (int i = 0, length = vars.length; i < length; i++)
         {
             if (vars[i].hasValue())
+            {
                 return true;
+            }
             else
+            {
                 continue;
+            }
         }
         return false;
     }
@@ -159,22 +168,29 @@ public class AC3Solver implements Solver
     public List<Constraint> constraintsWithAnyVals()
     {
         List<Constraint> applicable = new ArrayList<Constraint>();
-        for (int i = 0; i < constraints.size(); i++)
+
+        for (int i = 0, size = constraints.size(); i < size; i++)
         {
             if (constraintHasAnyVals(constraints.get(i)))
+            {
                 applicable.add(constraints.get(i));
+            }
         }
         return applicable;
     }
     
     public boolean constraintsSatisfied(List<Constraint> cList)
     {
-        for (int i = 0; i < cList.size(); i++)
+        for (int i = 0, size = cList.size(); i < size; i++)
         {
             if (cList.get(i).check())
+            {
                 continue;
-            else 
+            }
+            else
+            {
                 return false;
+            }
         }
         return true;
     }
@@ -183,8 +199,6 @@ public class AC3Solver implements Solver
     {
         return variables.size();
     }
-   
-    public void printAll()
-    {
-    }
+    
+    public void printAll(){}
 }

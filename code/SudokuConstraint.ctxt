@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.params=variables
+comment0.target=SudokuConstraint(Variable[])
+comment1.params=one\ two
+comment1.target=SudokuConstraint(Variable,\ Variable)
+comment2.params=
+comment2.target=boolean\ check()
+numComments=3

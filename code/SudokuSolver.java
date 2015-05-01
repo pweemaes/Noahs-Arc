@@ -23,12 +23,10 @@ public class SudokuSolver
             System.exit(1);
         }
         
-        Sudoku sudoku = new Sudoku(board);
-        double sudokuBacktrackTime = sudoku.solveAndPrint(sudoku);
-
-        System.out.print("\nRunning Times:\n\n");
+        SudokuAC3 sudokuAC3 = new SudokuAC3(board);
+        double sudokuAC3Time = sudokuAC3.solveAndPrint(sudokuAC3);
         
-        System.out.print("Sudoku Backtrack: " + sudokuBacktrackTime);
+        System.out.print("Solving times: " + sudokuAC3Time );
     }
     
     private static int[] insertIntoArray(Scanner input)
